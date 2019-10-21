@@ -1,0 +1,9 @@
+primeira
+segunda
+terceira
+quarta
+quinta
+sexta
+setima
+nona
+décima
