@@ -1,9 +1,3 @@
-primeira
-segunda
-terceira
-quarta
-quinta
-sexta
-setima
-nona
-décima
+comando1 436 644 756 867
+comando2 640 867 979 464
+comando3 756 645
