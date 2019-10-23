@@ -116,6 +116,8 @@ void input(char nome_arquivo[]){
 
 }
 
+//sdfsdfs
+
 int main(int argc, char const *argv[])
 {
 
