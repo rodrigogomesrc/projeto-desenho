@@ -2,6 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct comando_t
+{
+    char nomeComando[20];
+    int qtdParametros;
+    int parametros[30];
+    
+}comando;
+
+
+//possivelmente usar alocação dinâmica para a imagem
+typedef struct  imagem_t
+{
+    //as dimensões são: altura, largura e pixel (3 cores rgb)
+    char matriz[100][100][3];
+    int altura;
+    int largura;
+    
+}imagem;
 
 void split(char string_entrada[], char delim[], char retorno[][50]){
  
@@ -66,11 +84,16 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
     retorno[indice_retorno][indice_str_atual] = '\0'; // fecha a última string
 }
 
-// converter a entrada para uma struct
-void interpretar(char comando[50], int tamanho_vetor, int parametros[tamanho_vetor] ) {
+void interpretar(comando entrada) {
 
-	//interpretação dos comandos
+	puts(entrada.nomeComando);
+    for (int i = 0; i < entrada.qtdParametros; ++i)
+    {
+        printf("%d\n",  entrada.parametros[i]);   
+    }
 }
+
+// transformar em várias funções depois
 
 void input(char nome_arquivo[]){
 
@@ -81,8 +104,24 @@ void input(char nome_arquivo[]){
 	// usar alocação dinâmica nesses vetores
 	char text[50]; // essa variável tem tamanho fixo
 	char entradas[50][50];
-	char comando[50];
-	int parametros[50];
+	char nome_comando[50];
+	int parametros[30];
+    int qtd_parametros = 0;
+
+    //limpa os vetores
+    for (int i = 0; i < 30; ++i)
+    {
+        parametros[i] = -1;
+    }
+
+    for (int i = 0; i < 49; ++i)
+    {   
+        text[i] = ' ';
+        strcpy(entradas[i], " ");
+    }
+    text[49] = ' ';
+    strcpy(entradas[49], " ");
+
 
 	if(file == NULL){
 
@@ -90,33 +129,74 @@ void input(char nome_arquivo[]){
 
 	} else {
 
+
+
 		while(fgets(text, 50, file) != NULL){
 
+            qtd_parametros = 0;
 			split(text, " ", entradas);
 
 			// salvando o comando
-			strcpy(comando, entradas[0]);
+			strcpy(nome_comando, entradas[0]);
 
 			// separando os comandos
-			for (int i = 0; i < 49; ++i)
+			for (int i = 0; i < 29; ++i)
 			{
+                //converte a string vindo de entradas para o vetor de inteiros "parametros"
 				sscanf(entradas[i + 1], "%d", &parametros[i]);
 			}
 
-			/*
-			puts("parametros:");
-			for (int i = 0; i < 49; ++i)
-			{
-				printf("%d\n", parametros[i]);
-			}*/
+            for (int i = 0; i < 30; ++i)
+            {
+                if(parametros[i] == -1){
+                    break;
+                }
+
+                else{
+                    qtd_parametros++;
+                }
+            }
+
+            comando instrucao;
+            strcpy(instrucao.nomeComando, nome_comando);
+            instrucao.qtdParametros = qtd_parametros;
+
+            //talvez substituir criando uma função para copiar um vetor pra outro
+
+            // limpa o vetor de instrução da struct
+            for (int i = 0; i < 30; ++i)
+            {
+               instrucao.parametros[i] = -1;
+            }
+
+            //copiar os parâmetros extraídos para o vetor de parâmetros
+            for (int i = 0; i < 10; ++i)
+            {
+               instrucao.parametros[i] = parametros[i];
+            }
+            
+            interpretar(instrucao);
+
+            //limpa os vetores para guardar novos valores
+            for (int i = 0; i < 30; ++i)
+            {
+                parametros[i] = -1;
+            }
+
+            for (int i = 0; i < 49; ++i)
+            {   
+                text[i] = ' ';
+                strcpy(entradas[i], " ");
+            }
+            text[49] = ' ';
+            strcpy(entradas[49], " ");
+
 		}
 		
 		fclose(file);
 	}
 
 }
-
-//sdfsdfs
 
 int main(int argc, char const *argv[])
 {
