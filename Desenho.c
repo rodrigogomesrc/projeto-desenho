@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -84,28 +85,46 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
     retorno[indice_retorno][indice_str_atual] = '\0'; // fecha a última string
 }
 
-void interpretar(comando entrada) {
+imagem interpretar(comando entrada, imagem img) {
 
-	puts(entrada.nomeComando);
+    puts(entrada.nomeComando);
     for (int i = 0; i < entrada.qtdParametros; ++i)
     {
         printf("%d\n",  entrada.parametros[i]);   
     }
+
+    switch(entrada.nomeComando){
+        case "save":
+            save(img);
+
+        case "image":
+            img.altura = entrada.parametros[0];
+            img.largura = entrada.parametros[1];
+
+
+
+  }
+  
+  return img;
 }
 
+void save(imagem img){
+
+}
 // transformar em várias funções depois
 
 void input(char nome_arquivo[]){
 
+  imagem img;
 
-	FILE *file;
-	file = fopen(nome_arquivo, "r");
+    FILE *file;
+    file = fopen(nome_arquivo, "r");
 
-	// usar alocação dinâmica nesses vetores
-	char text[50]; // essa variável tem tamanho fixo
-	char entradas[50][50];
-	char nome_comando[50];
-	int parametros[30];
+    // usar alocação dinâmica nesses vetores
+    char text[50]; // essa variável tem tamanho fixo
+    char entradas[50][50];
+    char nome_comando[50];
+    int parametros[30];
     int qtd_parametros = 0;
 
     //limpa os vetores
@@ -123,28 +142,28 @@ void input(char nome_arquivo[]){
     strcpy(entradas[49], " ");
 
 
-	if(file == NULL){
+    if(file == NULL){
 
-		printf("File not found\n");
+        printf("File not found\n");
 
-	} else {
+    } else {
 
 
 
-		while(fgets(text, 50, file) != NULL){
+        while(fgets(text, 50, file) != NULL){
 
             qtd_parametros = 0;
-			split(text, " ", entradas);
+            split(text, " ", entradas);
 
-			// salvando o comando
-			strcpy(nome_comando, entradas[0]);
+            // salvando o comando
+            strcpy(nome_comando, entradas[0]);
 
-			// separando os comandos
-			for (int i = 0; i < 29; ++i)
-			{
+            // separando os comandos
+            for (int i = 0; i < 29; ++i)
+            {
                 //converte a string vindo de entradas para o vetor de inteiros "parametros"
-				sscanf(entradas[i + 1], "%d", &parametros[i]);
-			}
+                sscanf(entradas[i + 1], "%d", &parametros[i]);
+            }
 
             for (int i = 0; i < 30; ++i)
             {
@@ -175,7 +194,7 @@ void input(char nome_arquivo[]){
                instrucao.parametros[i] = parametros[i];
             }
             
-            interpretar(instrucao);
+            img = interpretar(instrucao, img);
 
             //limpa os vetores para guardar novos valores
             for (int i = 0; i < 30; ++i)
@@ -191,16 +210,16 @@ void input(char nome_arquivo[]){
             text[49] = ' ';
             strcpy(entradas[49], " ");
 
-		}
-		
-		fclose(file);
-	}
+        }
+        
+        fclose(file);
+    }
 
 }
 
 int main(int argc, char const *argv[])
 {
 
-	input("input.txt");
-	return 0;
+    input("input.txt");
+    return 0;
 }
