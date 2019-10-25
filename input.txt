@@ -1,3 +1,2 @@
-comando1 436 644 756 867
-comando2 640 867 979 464
-comando3 756 645
+image 50 50
+save

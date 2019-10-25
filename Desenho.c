@@ -87,28 +87,80 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
 
 imagem interpretar(comando entrada, imagem img) {
 
-    puts(entrada.nomeComando);
-    for (int i = 0; i < entrada.qtdParametros; ++i)
-    {
-        printf("%d\n",  entrada.parametros[i]);   
+    if(strcmp(entrada.nomeComando, "save") == 0){
+        save(img);
+    }
+    else if(strcmp(entrada.nomeComando, "image") == 0){
+        img.altura = entrada.parametros[0];
+        img.largura = entrada.parametros[1];
+    }
+    else if(strcmp(entrada.nomeComando, "color") == 0){
+        puts("comando color");
+    }
+    else if(strcmp(entrada.nomeComando, "clear") == 0){
+        puts("comando clear");
     }
 
-    switch(entrada.nomeComando){
-        case "save":
-            save(img);
-
-        case "image":
-            img.altura = entrada.parametros[0];
-            img.largura = entrada.parametros[1];
-
-
+  return img;
 
   }
   
-  return img;
-}
+
 
 void save(imagem img){
+    for(int i = 0; i < img.altura; i++)
+    {
+        for (int j = 0; j < img.largura; ++j)
+        {
+            for (int z = 0; z < 3; ++z)
+            {
+               img.matriz[i][j][z] = 255;
+            }
+        }
+
+    }
+
+    char altura[10];
+    char largura[10];
+    printf("%d %d\n", img.altura, img.largura);
+     sprintf(altura, "%d", img.altura);
+     sprintf(largura, "%d", img.largura);
+
+    FILE *file = fopen("imagem.ppm", "wb");
+    fprintf(file, "P3\n%s %s\n255\n", altura, largura);
+    char cor[4];
+    for (int j = 0; j < img.altura; ++j)
+    {
+        for (int i = 0; i < img.largura; ++i)
+        {
+                
+            for (int z = 0; z < 3; ++z){
+                sprintf(cor, "%d", img.matriz[j][i][z]);
+                fprintf(file, "%s", cor);
+                //printf("%d\n", img.matriz[j][i][z]);
+            }
+        }
+
+    }
+    fclose(file); 
+    /*
+
+
+  FILE *fp = fopen("imagem.ppm", "wb"); /* b - binary mode   (void) fprintf(fp, "P6\n%d %d\n255\n", dimx, dimy);
+  for (int j = 0; j < dimy; ++j)
+  {
+    for (int i = 0; i < dimx; ++i)
+    {
+     for (int z =)
+      color[0] = i % 256;
+      color[1] = j % 256; 
+      color[2] = (i * j) % 256;  
+      (void) fwrite(color, 1, 3, fp);
+    }
+  }
+  (void) fclose(fp);
+  return EXIT_SUCCESS;
+    */
 
 }
 // transformar em várias funções depois
