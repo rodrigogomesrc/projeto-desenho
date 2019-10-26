@@ -16,7 +16,7 @@ typedef struct comando_t
 typedef struct  imagem_t
 {
     //as dimensões são: altura, largura e pixel (3 cores rgb)
-    char matriz[100][100][3];
+    int matriz[100][100][3];
     int altura;
     int largura;
     
@@ -85,36 +85,17 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
     retorno[indice_retorno][indice_str_atual] = '\0'; // fecha a última string
 }
 
-imagem interpretar(comando entrada, imagem img) {
 
-    if(strcmp(entrada.nomeComando, "save") == 0){
-        save(img);
-    }
-    else if(strcmp(entrada.nomeComando, "image") == 0){
-        img.altura = entrada.parametros[0];
-        img.largura = entrada.parametros[1];
-    }
-    else if(strcmp(entrada.nomeComando, "color") == 0){
-        puts("comando color");
-    }
-    else if(strcmp(entrada.nomeComando, "clear") == 0){
-        puts("comando clear");
-    }
-
-  return img;
-
-  }
-  
+void save_image(imagem img){
 
 
-void save(imagem img){
     for(int i = 0; i < img.altura; i++)
     {
         for (int j = 0; j < img.largura; ++j)
         {
             for (int z = 0; z < 3; ++z)
             {
-               img.matriz[i][j][z] = 255;
+                img.matriz[i][j][z] = 255;
             }
         }
 
@@ -122,52 +103,57 @@ void save(imagem img){
 
     char altura[10];
     char largura[10];
-    printf("%d %d\n", img.altura, img.largura);
-     sprintf(altura, "%d", img.altura);
-     sprintf(largura, "%d", img.largura);
+    sprintf(altura, "%d", img.altura);
+    sprintf(largura, "%d", img.largura);
+    char cor[5];
 
     FILE *file = fopen("imagem.ppm", "wb");
     fprintf(file, "P3\n%s %s\n255\n", altura, largura);
-    char cor[4];
-    for (int j = 0; j < img.altura; ++j)
+    
+    for (int i = 0; i < img.altura; ++i)
     {
-        for (int i = 0; i < img.largura; ++i)
+        for (int j = 0; j < img.largura; ++j)
         {
-                
-            for (int z = 0; z < 3; ++z){
-                sprintf(cor, "%d", img.matriz[j][i][z]);
+            for (int z = 0; z < 3; ++z)
+            {
+                sprintf(cor, "%d", img.matriz[j][i][z]); 
+                strcat(cor, " ");
                 fprintf(file, "%s", cor);
-                //printf("%d\n", img.matriz[j][i][z]);
             }
+            
         }
-
     }
+
     fclose(file); 
-    /*
-
-
-  FILE *fp = fopen("imagem.ppm", "wb"); /* b - binary mode   (void) fprintf(fp, "P6\n%d %d\n255\n", dimx, dimy);
-  for (int j = 0; j < dimy; ++j)
-  {
-    for (int i = 0; i < dimx; ++i)
-    {
-     for (int z =)
-      color[0] = i % 256;
-      color[1] = j % 256; 
-      color[2] = (i * j) % 256;  
-      (void) fwrite(color, 1, 3, fp);
-    }
-  }
-  (void) fclose(fp);
-  return EXIT_SUCCESS;
-    */
 
 }
-// transformar em várias funções depois
+
+imagem interpretar(comando entrada, imagem img) {
+
+    if(strcmp(entrada.nomeComando, "save") == 0){
+        save_image(img);
+    }
+
+    else if(strcmp(entrada.nomeComando, "image") == 0){
+        img.altura = entrada.parametros[0];
+        img.largura = entrada.parametros[1];
+    }
+
+    else if(strcmp(entrada.nomeComando, "color") == 0){
+        puts("comando color");
+    }
+
+    else if(strcmp(entrada.nomeComando, "clear") == 0){
+        puts("comando clear");
+    }
+
+    return img;
+
+}
 
 void input(char nome_arquivo[]){
 
-  imagem img;
+    imagem img;
 
     FILE *file;
     file = fopen(nome_arquivo, "r");
@@ -199,8 +185,6 @@ void input(char nome_arquivo[]){
         printf("File not found\n");
 
     } else {
-
-
 
         while(fgets(text, 50, file) != NULL){
 
