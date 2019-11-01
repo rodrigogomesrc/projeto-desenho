@@ -5,8 +5,8 @@
 
 typedef struct comando_t
 {
-    char nomeComando[20];
-    int qtdParametros;
+    char nome_comando[20];
+    int qtd_parametros;
     int parametros[30];
     
 }comando;
@@ -16,9 +16,11 @@ typedef struct comando_t
 typedef struct  imagem_t
 {
     //as dimensões são: altura, largura e pixel (3 cores rgb)
-    int matriz[100][100][3];
+    int matriz[300][300][3];
     int altura;
     int largura;
+    int cor_atual[3];
+    char nome_imagem[31];
     
 }imagem;
 
@@ -101,14 +103,8 @@ void save_image(imagem img){
 
     }
 
-    char altura[10];
-    char largura[10];
-    sprintf(altura, "%d", img.altura);
-    sprintf(largura, "%d", img.largura);
-    char cor[5];
-
     FILE *file = fopen("imagem.ppm", "wb");
-    fprintf(file, "P3\n%s %s\n255\n", altura, largura);
+    fprintf(file, "P3\n%d %d\n255\n", img.altura, img.largura);
     
     for (int i = 0; i < img.altura; ++i)
     {
@@ -116,9 +112,8 @@ void save_image(imagem img){
         {
             for (int z = 0; z < 3; ++z)
             {
-                sprintf(cor, "%d", img.matriz[j][i][z]); 
-                strcat(cor, " ");
-                fprintf(file, "%s", cor);
+            
+                fprintf(file, "%d ", img.matriz[j][i][z]);
             }
             
         }
@@ -130,20 +125,20 @@ void save_image(imagem img){
 
 imagem interpretar(comando entrada, imagem img) {
 
-    if(strcmp(entrada.nomeComando, "save") == 0){
+    if(strcmp(entrada.nome_comando, "save") == 0){
         save_image(img);
     }
 
-    else if(strcmp(entrada.nomeComando, "image") == 0){
+    else if(strcmp(entrada.nome_comando, "image") == 0){
         img.altura = entrada.parametros[0];
         img.largura = entrada.parametros[1];
     }
 
-    else if(strcmp(entrada.nomeComando, "color") == 0){
+    else if(strcmp(entrada.nome_comando, "color") == 0){
         puts("comando color");
     }
 
-    else if(strcmp(entrada.nomeComando, "clear") == 0){
+    else if(strcmp(entrada.nome_comando, "clear") == 0){
         puts("comando clear");
     }
 
@@ -213,8 +208,8 @@ void input(char nome_arquivo[]){
             }
 
             comando instrucao;
-            strcpy(instrucao.nomeComando, nome_comando);
-            instrucao.qtdParametros = qtd_parametros;
+            strcpy(instrucao.nome_comando, nome_comando);
+            instrucao.qtd_parametros = qtd_parametros;
 
             //talvez substituir criando uma função para copiar um vetor pra outro
 

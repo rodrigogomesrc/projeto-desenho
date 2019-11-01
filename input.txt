@@ -1,2 +1,2 @@
-image 50 50
+image 200 200
 save
