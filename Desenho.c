@@ -16,13 +16,14 @@ typedef struct comando_t
 typedef struct  imagem_t
 {
     //as dimensões são: altura, largura e pixel (3 cores rgb)
-    int matriz[300][300][3];
+    int matriz[200][200][3];
     int altura;
     int largura;
     int cor_atual[3];
     char nome_imagem[31];
     
 }imagem;
+
 
 void split(char string_entrada[], char delim[], char retorno[][50]){
  
@@ -90,7 +91,7 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
 
 void save_image(imagem img){
 
-
+    /*
     for(int i = 0; i < img.altura; i++)
     {
         for (int j = 0; j < img.largura; ++j)
@@ -102,7 +103,7 @@ void save_image(imagem img){
         }
 
     }
-
+    */
     FILE *file = fopen("imagem.ppm", "wb");
     fprintf(file, "P3\n%d %d\n255\n", img.altura, img.largura);
     
@@ -123,8 +124,69 @@ void save_image(imagem img){
 
 }
 
+imagem line(imagem img, int parametros[]){
+
+    //só enquanto não tem a função clear
+
+    for(int i = 0; i < img.altura; i++)
+    {
+        for (int j = 0; j < img.largura; ++j)
+        {
+            for (int z = 0; z < 3; ++z)
+            {
+                //printf("I: %d J: %d Z: %d\n", i, j, z);
+                img.matriz[i][j][z] = 255;
+            }
+        }
+
+    }
+
+    int incrE, incrNE, x, y;
+    int x0 = parametros[0];
+    int x1 = parametros[2];
+    int y0 = parametros[1];
+    int y1 = parametros[2];
+
+    int deltax = x1 - x0;
+    int deltay = y1 - y0;
+    int delta = 2*deltay - deltax;
+
+    incrE = 2*deltay;
+    incrNE = 2*(deltay - deltax);
+    x = x0;
+    y = y0;
+
+    img.matriz[x][y][0] = 0;
+    img.matriz[x][y][1] = 0;
+    img.matriz[x][y][2] = 0;
+
+    while(x < x1){
+
+        if(delta <= 0){
+
+            delta += incrE;
+            x += 1;
+
+        } else{
+
+            delta += incrNE;
+            x += 1;
+            y += 1;
+        }
+
+        img.matriz[x][y][0] = 0;
+        img.matriz[x][y][1] = 0;
+        img.matriz[x][y][2] = 0;
+    }
+
+
+    return img;   
+}
+
+
 imagem interpretar(comando entrada, imagem img) {
 
+    printf("Nome do comando: %s\n", entrada.nome_comando);
     if(strcmp(entrada.nome_comando, "save") == 0){
         save_image(img);
     }
@@ -142,9 +204,15 @@ imagem interpretar(comando entrada, imagem img) {
         puts("comando clear");
     }
 
+    else if(strcmp(entrada.nome_comando, "line") == 0){
+        img = line(img, entrada.parametros);
+    }
+
+
     return img;
 
 }
+
 
 void input(char nome_arquivo[]){
 
