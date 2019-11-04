@@ -1,7 +1,7 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 typedef struct comando_t
 {
@@ -141,44 +141,89 @@ imagem line(imagem img, int parametros[]){
 
     }
 
-    int incrE, incrNE, x, y;
     int x0 = parametros[0];
     int x1 = parametros[2];
     int y0 = parametros[1];
-    int y1 = parametros[2];
+    int y1 = parametros[3];
+    int dx, dy, yi, xi, D, y, x;
 
-    int deltax = x1 - x0;
-    int deltay = y1 - y0;
-    int delta = 2*deltay - deltax;
+    printf("X0: %d Y0: %d X1: %d Y1: %d \n",x0, y0, x1, y1);
+    
+    if(x1 < x0 || y1 < y0){
 
-    incrE = 2*deltay;
-    incrNE = 2*(deltay - deltax);
-    x = x0;
-    y = y0;
+        x0 = parametros[2];
+        x1 = parametros[0];
+        y0 = parametros[3];
+        y1 = parametros[1];
 
-    img.matriz[x][y][0] = 0;
-    img.matriz[x][y][1] = 0;
-    img.matriz[x][y][2] = 0;
+        printf("X0: %d Y0: %d X1: %d Y1: %d \n",x0, y0, x1, y1);
 
-    while(x < x1){
-
-        if(delta <= 0){
-
-            delta += incrE;
-            x += 1;
-
-        } else{
-
-            delta += incrNE;
-            x += 1;
-            y += 1;
-        }
-
-        img.matriz[x][y][0] = 0;
-        img.matriz[x][y][1] = 0;
-        img.matriz[x][y][2] = 0;
     }
 
+    dx = x1 - x0;
+    dy = y1 - y0;
+
+    printf("X0: %d X1: %d\n", x0, x1);
+    printf("Y0: %d Y1: %d\n", y0, y1);
+
+    if( abs(y1 - y0) < abs(x1 - x0)){
+
+        puts("primeiro");
+            yi = 1;
+
+            if(dy < 0){
+
+                yi = -1;
+                dy = -dy;
+            }
+            D = 2*dy - dx;
+            y = y0;
+
+            printf("X0: %d X1: %d\n",x0, x1);
+            for (int x = x0; x <= x1; ++x)
+            {
+                printf("Caso 4 X: %d Y: %d\n",x, y);
+                img.matriz[x][y][0] = 0;
+                img.matriz[x][y][1] = 0;
+                img.matriz[x][y][2] = 0;
+
+                if(D > 0){
+                    y += yi;
+                    D -= 2*dx;
+                }
+                D += 2*dy;
+            }
+
+    } else {
+
+       puts("segundo");
+
+            xi = 1;
+
+            if(dx < 0){
+
+                xi = -1;
+                dx = -dx;
+            }
+            D = 2*dx - dy;
+            x = x0;
+
+            printf("Y0: %d Y1: %d\n",y0, y1);
+
+            for (y = y0; y <= y1; ++y)
+            {
+                printf("Caso 3 X: %d Y: %d\n",x, y);
+                img.matriz[x][y][0] = 0;
+                img.matriz[x][y][1] = 0;
+                img.matriz[x][y][2] = 0;
+
+                if(D > 0){
+                    x += xi;
+                    D -= 2*dy;
+                }
+                D += 2*dx;
+            }
+    } 
 
     return img;   
 }
@@ -186,7 +231,6 @@ imagem line(imagem img, int parametros[]){
 
 imagem interpretar(comando entrada, imagem img) {
 
-    printf("Nome do comando: %s\n", entrada.nome_comando);
     if(strcmp(entrada.nome_comando, "save") == 0){
         save_image(img);
     }
