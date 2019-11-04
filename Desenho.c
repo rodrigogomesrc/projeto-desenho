@@ -91,19 +91,6 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
 
 void save_image(imagem img){
 
-    /*
-    for(int i = 0; i < img.altura; i++)
-    {
-        for (int j = 0; j < img.largura; ++j)
-        {
-            for (int z = 0; z < 3; ++z)
-            {
-                img.matriz[i][j][z] = 255;
-            }
-        }
-
-    }
-    */
     FILE *file = fopen("imagem.ppm", "wb");
     fprintf(file, "P3\n%d %d\n255\n", img.altura, img.largura);
     
@@ -183,6 +170,20 @@ imagem line(imagem img, int parametros[]){
     return img;   
 }
 
+imagem clear(imagem img, int parametros[]){
+    for(int i = 0; i < img.altura; i++)
+    {
+        for (int j = 0; j < img.largura; ++j)
+        {
+            for (int z = 0; z < 3; ++z)
+            {
+                img.matriz[i][j][z] = 255;
+            }
+        } 
+    }
+
+    return img; 
+}
 
 imagem interpretar(comando entrada, imagem img) {
 
@@ -201,7 +202,7 @@ imagem interpretar(comando entrada, imagem img) {
     }
 
     else if(strcmp(entrada.nome_comando, "clear") == 0){
-        puts("comando clear");
+        img = clear(img, entrada.parametros);
     }
 
     else if(strcmp(entrada.nome_comando, "line") == 0){
