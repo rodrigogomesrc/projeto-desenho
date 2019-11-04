@@ -16,7 +16,7 @@ typedef struct comando_t
 typedef struct  imagem_t
 {
     //as dimensões são: altura, largura e pixel (3 cores rgb)
-    int matriz[200][200][3];
+    int ***matriz;
     int altura;
     int largura;
     int cor_atual[3];
@@ -155,6 +155,8 @@ imagem line(imagem img, int parametros[]){
     return img;   
 }
 
+
+
 imagem clear(imagem img, int parametros[]){
 
     for(int i = 0; i < img.altura; i++)
@@ -202,6 +204,23 @@ imagem interpretar(comando entrada, imagem img) {
 void input(char nome_arquivo[]){
 
     imagem img;
+
+    img.matriz = calloc(200, sizeof(int**));
+  
+    for (int i = 0; i < 200; ++i)
+    {
+        img.matriz[i] = calloc(200, sizeof(int*));
+        
+    }
+
+    for (int i = 0; i < 200; ++i)
+    {
+        for (int j = 0; j < 200; ++j)
+        {
+            img.matriz[i][j] = calloc(3, sizeof(int));
+           
+        }
+    }
 
     FILE *file;
     file = fopen(nome_arquivo, "r");
@@ -297,6 +316,23 @@ void input(char nome_arquivo[]){
         }
         
         fclose(file);
+
+
+        for (int i = 0; i < 200; ++i)
+        {
+            for (int j = 0; j < 200; ++j)
+            {
+                free(img.matriz[i][j]);
+                  
+            }
+        }
+
+        for (int i = 0; i < 200; ++i)
+        {
+            free(img.matriz[i]);
+        }
+
+        free(img.matriz);
     }
 
 }
