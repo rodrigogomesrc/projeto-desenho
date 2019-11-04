@@ -128,9 +128,9 @@ imagem line(imagem img, int parametros[]){
     x = x0;
     y = y0;
 
-    img.matriz[x][y][0] = 0;
-    img.matriz[x][y][1] = 0;
-    img.matriz[x][y][2] = 0;
+    img.matriz[x][y][0] = img.cor_atual[0];
+    img.matriz[x][y][1] = img.cor_atual[1];
+    img.matriz[x][y][2] = img.cor_atual[2];
 
     while(x < x1){
 
@@ -146,16 +146,21 @@ imagem line(imagem img, int parametros[]){
             y += 1;
         }
 
-        img.matriz[x][y][0] = 0;
-        img.matriz[x][y][1] = 0;
-        img.matriz[x][y][2] = 0;
+        img.matriz[x][y][0] = img.cor_atual[0];
+        img.matriz[x][y][1] = img.cor_atual[1];
+        img.matriz[x][y][2] = img.cor_atual[2];
     }
 
 
     return img;   
 }
 
-
+imagem color(imagem img, int parametros[]){
+    img.cor_atual[0] = parametros[0];
+    img.cor_atual[1] = parametros[1];
+    img.cor_atual[2] = parametros[2];
+    return img;
+}
 
 imagem clear(imagem img, int parametros[]){
 
@@ -171,6 +176,10 @@ imagem clear(imagem img, int parametros[]){
 
     return img; 
 }
+ 
+imagem open(imagem img, int parametros[]){
+    return img;
+}
 
 imagem interpretar(comando entrada, imagem img) {
 
@@ -184,7 +193,7 @@ imagem interpretar(comando entrada, imagem img) {
     }
 
     else if(strcmp(entrada.nome_comando, "color") == 0){
-        puts("comando color");
+        img = color(img, entrada.parametros);
     }
 
     else if(strcmp(entrada.nome_comando, "clear") == 0){
@@ -194,7 +203,9 @@ imagem interpretar(comando entrada, imagem img) {
     else if(strcmp(entrada.nome_comando, "line") == 0){
         img = line(img, entrada.parametros);
     }
-
+    else if(strcmp(entrada.nome_comando, "open") == 0){
+        img = open(img, entrada.parametros);
+    }
 
     return img;
 
