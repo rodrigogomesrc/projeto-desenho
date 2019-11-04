@@ -113,21 +113,6 @@ void save_image(imagem img){
 
 imagem line(imagem img, int parametros[]){
 
-    //só enquanto não tem a função clear
-
-    for(int i = 0; i < img.altura; i++)
-    {
-        for (int j = 0; j < img.largura; ++j)
-        {
-            for (int z = 0; z < 3; ++z)
-            {
-                //printf("I: %d J: %d Z: %d\n", i, j, z);
-                img.matriz[i][j][z] = 255;
-            }
-        }
-
-    }
-
     int incrE, incrNE, x, y;
     int x0 = parametros[0];
     int x1 = parametros[2];
@@ -171,6 +156,7 @@ imagem line(imagem img, int parametros[]){
 }
 
 imagem clear(imagem img, int parametros[]){
+
     for(int i = 0; i < img.altura; i++)
     {
         for (int j = 0; j < img.largura; ++j)
@@ -184,8 +170,8 @@ imagem clear(imagem img, int parametros[]){
     return img; 
 }
 
-imagem interpretar(comando entrada, imagem img) {s
-    printf("Nome do comando: %s\n", entrada.nome_comando);
+imagem interpretar(comando entrada, imagem img) {
+
     if(strcmp(entrada.nome_comando, "save") == 0){
         save_image(img);
     }
