@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 image 500 500
 clear 0 0
+=======
+image 200 200
+clear 0 0 
+line 20 139 150 10
+>>>>>>> 08a72b224d5f5fbd8466fcb1323f436cb3714be1
 save

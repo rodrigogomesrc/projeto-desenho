@@ -175,18 +175,16 @@ imagem clear(imagem img, int parametros[]){
     {
         for (int j = 0; j < img.largura; ++j)
         {
-            for (int z = 0; z < 3; ++z)
-            {
-                img.matriz[i][j][z] = 255;
-            }
+            img.matriz[i][j][0] = parametros[0];
+            img.matriz[i][j][1] = parametros[1];
+            img.matriz[i][j][2] = parametros[2];
         } 
     }
 
     return img; 
 }
 
-imagem interpretar(comando entrada, imagem img) {
-
+imagem interpretar(comando entrada, imagem img) {s
     printf("Nome do comando: %s\n", entrada.nome_comando);
     if(strcmp(entrada.nome_comando, "save") == 0){
         save_image(img);
