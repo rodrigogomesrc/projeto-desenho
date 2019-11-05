@@ -5,4 +5,3 @@ line 0 0 199 199
 color 255 0 0
 line 0 10 199 199
 save
-open imagem_teste.ppm

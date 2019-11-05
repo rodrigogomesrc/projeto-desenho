@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,7 +7,6 @@ typedef struct comando_t
     char nome_comando[20];
     int qtd_parametros;
     int parametros[30];
-    char parametro_string[30];
     
 }comando;
 
@@ -159,11 +157,13 @@ imagem alocar_matriz(){
 
 imagem realocar_matriz(imagem img){
 
+    //img.matriz = calloc(img.altura, sizeof(int**));
     img.matriz = realloc(img.matriz, sizeof(int**) * img.altura);
   
     for (int i = 0; i < img.altura; ++i)
     {
-        img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.largura);   
+        img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.largura);
+        //img.matriz[i] = calloc(img.largura, sizeof(int*));
     }
 
     for (int i = 0; i < img.altura; ++i)
@@ -171,6 +171,8 @@ imagem realocar_matriz(imagem img){
         for (int j = 0; j < img.largura; ++j)
         {
             img.matriz[i][j] = realloc(img.matriz[i][j], sizeof(int) * 3);
+            //img.matriz[i][j] = calloc(3, sizeof(int));
+           
         }
     }
 
@@ -244,9 +246,8 @@ imagem clear(imagem img, int parametros[]){
     return img; 
 }
  
-imagem open(imagem img, char nome_arquivo[]){
-
-    puts(nome_arquivo);
+imagem open(imagem img, int parametros[]){
+    
     return img;
 }
 
@@ -279,7 +280,7 @@ imagem interpretar(comando entrada, imagem img) {
     }
     else if(strcmp(entrada.nome_comando, "open") == 0){
 
-        img = open(img, entrada.parametro_string);
+        img = open(img, entrada.parametros);
     }
 
     return img;
@@ -330,67 +331,57 @@ void input(char nome_arquivo[]){
             // salvando o comando
             strcpy(nome_comando, entradas[0]);
 
+            // separando os comandos
+            for (int i = 0; i < 29; ++i)
+            {
+                //converte a string vindo de entradas para o vetor de inteiros "parametros"
+                sscanf(entradas[i + 1], "%d", &parametros[i]);
+            }
+
+            for (int i = 0; i < 30; ++i)
+            {
+                if(parametros[i] == -1){
+                    break;
+                }
+
+                else{
+                    qtd_parametros++;
+                }
+            }
+
             comando instrucao;
             strcpy(instrucao.nome_comando, nome_comando);
+            instrucao.qtd_parametros = qtd_parametros;
 
-            // caso o comando não seja open ler os parametros como inteiros
-            if(strcmp(nome_comando, "open") != 0){
+            //talvez substituir criando uma função para copiar um vetor pra outro
 
-                 // separando os comandos
-                for (int i = 0; i < 29; ++i)
-                {
-                    //converte a string vindo de entradas para o vetor de inteiros "parametros"
-                    sscanf(entradas[i + 1], "%d", &parametros[i]);
-                }
-
-                //conta a quantidade de parâmetros
-                for (int i = 0; i < 30; ++i)
-                {
-                    if(parametros[i] == -1){
-                        break;
-                    }
-
-                    else{
-                        qtd_parametros++;
-                    }
-                }
-
-                instrucao.qtd_parametros = qtd_parametros;
-
-                // limpa o vetor de instrução da struct
-                for (int i = 0; i < 30; ++i)
-                {
-                   instrucao.parametros[i] = -1;
-                }
-
-                //copiar os parâmetros extraídos para o vetor de parâmetros
-                for (int i = 0; i < 10; ++i)
-                {
-                   instrucao.parametros[i] = parametros[i];
-                }
-                
-                img = interpretar(instrucao, img);
-
-                //limpa os vetores para guardar novos valores
-                for (int i = 0; i < 30; ++i)
-                {
-                    parametros[i] = -1;
-                }
-
-                for (int i = 0; i < 49; ++i)
-                {   
-                    text[i] = ' ';
-                    strcpy(entradas[i], " ");
-                }
-                text[49] = ' ';
-                strcpy(entradas[49], " ");
-
-            } else {
-
-                strcpy(instrucao.parametro_string, entradas[1]);
-                img = interpretar(instrucao, img);
-
+            // limpa o vetor de instrução da struct
+            for (int i = 0; i < 30; ++i)
+            {
+               instrucao.parametros[i] = -1;
             }
+
+            //copiar os parâmetros extraídos para o vetor de parâmetros
+            for (int i = 0; i < 10; ++i)
+            {
+               instrucao.parametros[i] = parametros[i];
+            }
+            
+            img = interpretar(instrucao, img);
+
+            //limpa os vetores para guardar novos valores
+            for (int i = 0; i < 30; ++i)
+            {
+                parametros[i] = -1;
+            }
+
+            for (int i = 0; i < 49; ++i)
+            {   
+                text[i] = ' ';
+                strcpy(entradas[i], " ");
+            }
+            text[49] = ' ';
+            strcpy(entradas[49], " ");
 
         }
         
