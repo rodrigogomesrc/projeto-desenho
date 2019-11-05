@@ -111,6 +111,75 @@ void save_image(imagem img){
 
 }
 
+void desalocar_matriz(imagem img){
+
+    for (int i = 0; i < img.altura; ++i)
+    {
+        for (int j = 0; j < img.largura; ++j)
+        {
+            free(img.matriz[i][j]);
+                  
+        }
+    }
+
+    for (int i = 0; i < img.altura; ++i)
+    {
+        free(img.matriz[i]);
+    }
+
+    free(img.matriz);
+
+}
+
+imagem alocar_matriz(){
+
+    imagem img;
+
+    img.matriz = calloc(1, sizeof(int**));
+  
+    for (int i = 0; i < 1; ++i)
+    {
+        img.matriz[i] = calloc(1, sizeof(int*));
+        
+    }
+
+    for (int i = 0; i < 1; ++i)
+    {
+        for (int j = 0; j < 1; ++j)
+        {
+            img.matriz[i][j] = calloc(3, sizeof(int));
+           
+        }
+    }
+
+    return img;
+}
+
+
+imagem realocar_matriz(imagem img){
+
+    //img.matriz = calloc(img.altura, sizeof(int**));
+    img.matriz = realloc(img.matriz, sizeof(int**) * img.altura);
+  
+    for (int i = 0; i < img.altura; ++i)
+    {
+        img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.largura);
+        //img.matriz[i] = calloc(img.largura, sizeof(int*));
+    }
+
+    for (int i = 0; i < img.altura; ++i)
+    {
+        for (int j = 0; j < img.largura; ++j)
+        {
+            img.matriz[i][j] = realloc(img.matriz[i][j], sizeof(int) * 3);
+            //img.matriz[i][j] = calloc(3, sizeof(int));
+           
+        }
+    }
+
+    return img;
+}
+
 imagem line(imagem img, int parametros[]){
 
     int incrE, incrNE, x, y;
@@ -178,6 +247,7 @@ imagem clear(imagem img, int parametros[]){
 }
  
 imagem open(imagem img, int parametros[]){
+    
     return img;
 }
 
@@ -188,22 +258,28 @@ imagem interpretar(comando entrada, imagem img) {
     }
 
     else if(strcmp(entrada.nome_comando, "image") == 0){
+
         img.altura = entrada.parametros[0];
         img.largura = entrada.parametros[1];
+        img = realocar_matriz(img);
     }
 
     else if(strcmp(entrada.nome_comando, "color") == 0){
+
         img = color(img, entrada.parametros);
     }
 
     else if(strcmp(entrada.nome_comando, "clear") == 0){
+
         img = clear(img, entrada.parametros);
     }
 
     else if(strcmp(entrada.nome_comando, "line") == 0){
+
         img = line(img, entrada.parametros);
     }
     else if(strcmp(entrada.nome_comando, "open") == 0){
+
         img = open(img, entrada.parametros);
     }
 
@@ -214,24 +290,7 @@ imagem interpretar(comando entrada, imagem img) {
 
 void input(char nome_arquivo[]){
 
-    imagem img;
-
-    img.matriz = calloc(200, sizeof(int**));
-  
-    for (int i = 0; i < 200; ++i)
-    {
-        img.matriz[i] = calloc(200, sizeof(int*));
-        
-    }
-
-    for (int i = 0; i < 200; ++i)
-    {
-        for (int j = 0; j < 200; ++j)
-        {
-            img.matriz[i][j] = calloc(3, sizeof(int));
-           
-        }
-    }
+    imagem img = alocar_matriz();
 
     FILE *file;
     file = fopen(nome_arquivo, "r");
@@ -328,24 +387,8 @@ void input(char nome_arquivo[]){
         
         fclose(file);
 
-
-        for (int i = 0; i < 200; ++i)
-        {
-            for (int j = 0; j < 200; ++j)
-            {
-                free(img.matriz[i][j]);
-                  
-            }
-        }
-
-        for (int i = 0; i < 200; ++i)
-        {
-            free(img.matriz[i]);
-        }
-
-        free(img.matriz);
+        desalocar_matriz(img);
     }
-
 }
 
 int main(int argc, char const *argv[])
