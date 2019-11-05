@@ -7,6 +7,7 @@ typedef struct comando_t
     char nome_comando[20];
     int qtd_parametros;
     int parametros[30];
+    char comando_string[30];
     
 }comando;
 
@@ -157,22 +158,18 @@ imagem alocar_matriz(){
 
 imagem realocar_matriz(imagem img){
 
-    //img.matriz = calloc(img.altura, sizeof(int**));
     img.matriz = realloc(img.matriz, sizeof(int**) * img.altura);
   
     for (int i = 0; i < img.altura; ++i)
     {
         img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.largura);
-        //img.matriz[i] = calloc(img.largura, sizeof(int*));
     }
 
     for (int i = 0; i < img.altura; ++i)
     {
         for (int j = 0; j < img.largura; ++j)
         {
-            img.matriz[i][j] = realloc(img.matriz[i][j], sizeof(int) * 3);
-            //img.matriz[i][j] = calloc(3, sizeof(int));
-           
+            img.matriz[i][j] = realloc(img.matriz[i][j], sizeof(int) * 3); 
         }
     }
 
@@ -246,8 +243,8 @@ imagem clear(imagem img, int parametros[]){
     return img; 
 }
  
-imagem open(imagem img, int parametros[]){
-    
+imagem open(imagem img, char nome_arquivo[]){
+  
     return img;
 }
 
@@ -280,7 +277,7 @@ imagem interpretar(comando entrada, imagem img) {
     }
     else if(strcmp(entrada.nome_comando, "open") == 0){
 
-        img = open(img, entrada.parametros);
+        img = open(img, entrada.comando_string);
     }
 
     return img;
@@ -331,6 +328,14 @@ void input(char nome_arquivo[]){
             // salvando o comando
             strcpy(nome_comando, entradas[0]);
 
+            comando instrucao;
+            strcpy(instrucao.nome_comando, nome_comando);
+
+            if(strcmp(nome_comando, "open") == 0){
+
+                 strcpy(instrucao.comando_string, entradas[1]);
+            }
+
             // separando os comandos
             for (int i = 0; i < 29; ++i)
             {
@@ -349,8 +354,6 @@ void input(char nome_arquivo[]){
                 }
             }
 
-            comando instrucao;
-            strcpy(instrucao.nome_comando, nome_comando);
             instrucao.qtd_parametros = qtd_parametros;
 
             //talvez substituir criando uma função para copiar um vetor pra outro
