@@ -289,7 +289,33 @@ imagem clear(imagem img, int parametros[]){
 }
  
 imagem open(imagem img, char nome_arquivo[]){
-  
+    FILE *file;
+    file = fopen(nome_arquivo, "r");
+    if(file == NULL){
+
+        printf("File not found\n");
+
+
+    } else {
+        
+        char text[10];
+        char text_split[2][4];
+        fgets(text, 10, file);
+        fgets(text, 10, file);
+        split(text, " ", text_split);
+
+        char altura;
+        char largura;
+        strcpy(altura, text_split[0]);
+        strcpy(largura, text_split[1]);
+
+        imagem img;
+
+        sscanf(img.altura, "%d", altura);
+
+        sscanf(img.largura, "%d", largura);
+
+    }
     return img;
 }
 
