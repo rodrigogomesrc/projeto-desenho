@@ -2,5 +2,7 @@ open arquivo_teste.txt
 image 200 200
 clear 255 255 255
 color 100 30 200
-line 0 100 199 0
+line 0 100 199 199
+color 100 0 0
+line 0 10 199 10
 save
