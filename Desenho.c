@@ -8,6 +8,7 @@ typedef struct comando_t
     char nome_comando[20];
     int qtd_parametros;
     int parametros[30];
+    char parametro_string[30];
     
 }comando;
 
@@ -246,8 +247,9 @@ imagem clear(imagem img, int parametros[]){
     return img; 
 }
  
-imagem open(imagem img, int parametros[]){
-    
+imagem open(imagem img, char nome_arquivo[]){
+
+    puts(nome_arquivo);
     return img;
 }
 
@@ -280,7 +282,7 @@ imagem interpretar(comando entrada, imagem img) {
     }
     else if(strcmp(entrada.nome_comando, "open") == 0){
 
-        img = open(img, entrada.parametros);
+        img = open(img, entrada.parametro_string);
     }
 
     return img;
@@ -331,57 +333,67 @@ void input(char nome_arquivo[]){
             // salvando o comando
             strcpy(nome_comando, entradas[0]);
 
-            // separando os comandos
-            for (int i = 0; i < 29; ++i)
-            {
-                //converte a string vindo de entradas para o vetor de inteiros "parametros"
-                sscanf(entradas[i + 1], "%d", &parametros[i]);
-            }
-
-            for (int i = 0; i < 30; ++i)
-            {
-                if(parametros[i] == -1){
-                    break;
-                }
-
-                else{
-                    qtd_parametros++;
-                }
-            }
-
             comando instrucao;
             strcpy(instrucao.nome_comando, nome_comando);
-            instrucao.qtd_parametros = qtd_parametros;
 
-            //talvez substituir criando uma função para copiar um vetor pra outro
+            // caso o comando não seja open ler os parametros como inteiros
+            if(strcmp(nome_comando, "open") != 0){
 
-            // limpa o vetor de instrução da struct
-            for (int i = 0; i < 30; ++i)
-            {
-               instrucao.parametros[i] = -1;
+                 // separando os comandos
+                for (int i = 0; i < 29; ++i)
+                {
+                    //converte a string vindo de entradas para o vetor de inteiros "parametros"
+                    sscanf(entradas[i + 1], "%d", &parametros[i]);
+                }
+
+                //conta a quantidade de parâmetros
+                for (int i = 0; i < 30; ++i)
+                {
+                    if(parametros[i] == -1){
+                        break;
+                    }
+
+                    else{
+                        qtd_parametros++;
+                    }
+                }
+
+                instrucao.qtd_parametros = qtd_parametros;
+
+                // limpa o vetor de instrução da struct
+                for (int i = 0; i < 30; ++i)
+                {
+                   instrucao.parametros[i] = -1;
+                }
+
+                //copiar os parâmetros extraídos para o vetor de parâmetros
+                for (int i = 0; i < 10; ++i)
+                {
+                   instrucao.parametros[i] = parametros[i];
+                }
+                
+                img = interpretar(instrucao, img);
+
+                //limpa os vetores para guardar novos valores
+                for (int i = 0; i < 30; ++i)
+                {
+                    parametros[i] = -1;
+                }
+
+                for (int i = 0; i < 49; ++i)
+                {   
+                    text[i] = ' ';
+                    strcpy(entradas[i], " ");
+                }
+                text[49] = ' ';
+                strcpy(entradas[49], " ");
+
+            } else {
+
+                strcpy(instrucao.parametro_string, entradas[1]);
+                img = interpretar(instrucao, img);
+
             }
-
-            //copiar os parâmetros extraídos para o vetor de parâmetros
-            for (int i = 0; i < 10; ++i)
-            {
-               instrucao.parametros[i] = parametros[i];
-            }
-            
-            img = interpretar(instrucao, img);
-
-            //limpa os vetores para guardar novos valores
-            for (int i = 0; i < 30; ++i)
-            {
-                parametros[i] = -1;
-            }
-
-            for (int i = 0; i < 49; ++i)
-            {   
-                text[i] = ' ';
-                strcpy(entradas[i], " ");
-            }
-            text[49] = ' ';
-            strcpy(entradas[49], " ");
 
         }
         
