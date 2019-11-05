@@ -158,13 +158,11 @@ imagem alocar_matriz(){
 
 imagem realocar_matriz(imagem img){
 
-    //img.matriz = calloc(img.altura, sizeof(int**));
     img.matriz = realloc(img.matriz, sizeof(int**) * img.altura);
   
     for (int i = 0; i < img.altura; ++i)
     {
-        img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.largura);
-        //img.matriz[i] = calloc(img.largura, sizeof(int*));
+        img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.largura);   
     }
 
     for (int i = 0; i < img.altura; ++i)
@@ -172,8 +170,6 @@ imagem realocar_matriz(imagem img){
         for (int j = 0; j < img.largura; ++j)
         {
             img.matriz[i][j] = realloc(img.matriz[i][j], sizeof(int) * 3);
-            //img.matriz[i][j] = calloc(3, sizeof(int));
-           
         }
     }
 
@@ -225,6 +221,7 @@ imagem line(imagem img, int parametros[]){
 }
 
 imagem color(imagem img, int parametros[]){
+    
     img.cor_atual[0] = parametros[0];
     img.cor_atual[1] = parametros[1];
     img.cor_atual[2] = parametros[2];
