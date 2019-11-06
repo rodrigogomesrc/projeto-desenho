@@ -1,3 +1,4 @@
+open img.ppm
 image 200 200
 clear 255 255 255
 color 100 30 200

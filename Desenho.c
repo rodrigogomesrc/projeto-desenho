@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 typedef struct comando_t
 {
@@ -227,7 +228,7 @@ imagem line(imagem img, int parametros[]) {
             y0 += sy;
         }
     }
-    
+
     return img;   
 }
 
@@ -253,58 +254,85 @@ imagem clear(imagem img, int parametros[]){
 
     return img; 
 }
+
+void limpar_string_arquivo(char entrada[], char saida[]){
+
+    int i = 0;
+    while(1){
+
+        if(isalpha(entrada[i]) || entrada[i] == '.'){
+
+            saida[i] = entrada[i];
+
+        } else if(entrada[i] == '\0'){
+
+            break;
+        }
+
+        i++;
+    }
+}
  
 imagem open(imagem img, char nome_arquivo[]){
 
-    /*
+    char text[10];
+    char text_split[3][50];
+    char altura[5];
+    char largura[5];
+    char nome_arquivo_tratado[30];
+
+    for (int i = 0; i < 30; ++i)
+    {
+        nome_arquivo_tratado[i] = '\0';
+    }
+
+    limpar_string_arquivo(nome_arquivo, nome_arquivo_tratado);
+
     FILE *file;
-    file = fopen(nome_arquivo, "r");
+    file = fopen(nome_arquivo_tratado, "r");
+
     if(file == NULL){
 
-        printf("File not found\n");
-
+        puts("Arquivo não encontrado");
 
     } else {
         
-        char text[10];
-        char text_split[2][4];
         fgets(text, 10, file);
         fgets(text, 10, file);
+        
         split(text, " ", text_split);
-
-        char altura;
-        char largura;
+        
         strcpy(altura, text_split[0]);
         strcpy(largura, text_split[1]);
-
+        
         imagem img;
 
-        sscanf(img.altura, "%d", altura);
+        sscanf(altura, "%d", &img.altura);
+        sscanf(largura, "%d", &img.largura);
 
-        sscanf(img.largura, "%d", largura);
+        printf("%d\n", img.altura);
+        printf("%d\n", img.largura);
+    }
 
-    }*/
     return img;
 }
 
 imagem interpretar(comando entrada, imagem img) {
 
     if(strcmp(entrada.nome_comando, "save") == 0){
+
         save_image(img);
     }
-
     else if(strcmp(entrada.nome_comando, "image") == 0){
 
         img.altura = entrada.parametros[0];
         img.largura = entrada.parametros[1];
         img = realocar_matriz(img);
     }
-
     else if(strcmp(entrada.nome_comando, "color") == 0){
 
         img = color(img, entrada.parametros);
     }
-
     else if(strcmp(entrada.nome_comando, "clear") == 0){
 
         img = clear(img, entrada.parametros);
@@ -355,7 +383,7 @@ void input(char nome_arquivo[]){
 
     if(file == NULL){
 
-        printf("File not found\n");
+        printf("Arquivo não encontrado\n");
 
     } else {
 
