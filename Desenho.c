@@ -84,11 +84,12 @@ imagem line(imagem img, int parametros[]) {
 imagem polygon(imagem img, comando cmd){
 
     int qtd_pontos = cmd.parametros[0];
-    int coordenadas = cmd.qtd_parametros -1;
+    int ordenadas = cmd.qtd_parametros -1;
     int possivel = 1;
     int parametros[4];
+    double det;
 
-    if(((coordenadas) % 2) != 0){
+    if(((ordenadas) % 2) != 0){
 
         puts("não é possivel criar um polígono");
         possivel = 0;
@@ -103,9 +104,9 @@ imagem polygon(imagem img, comando cmd){
 
     if(possivel == 1){
 
-        for (int i = 0; i < coordenadas; i += 2)
+        for (int i = 0; i < ordenadas; i += 2)
         {
-            if(i == coordenadas - 2) {
+            if(i == ordenadas - 2) {
 
                 parametros[0] = cmd.parametros[i + 1];
                 parametros[1] = cmd.parametros[i + 2];
@@ -136,6 +137,7 @@ imagem color(imagem img, int parametros[]){
     img.cor_atual[0] = parametros[0];
     img.cor_atual[1] = parametros[1];
     img.cor_atual[2] = parametros[2];
+
     return img;
 }
 
@@ -161,6 +163,8 @@ imagem open(imagem img, char nome_arquivo[]){
     char altura[5];
     char largura[5];
     char nome_arquivo_tratado[30];
+    int qtd_cores;
+
 
     for (int i = 0; i < 30; ++i)
     {
@@ -177,6 +181,8 @@ imagem open(imagem img, char nome_arquivo[]){
         puts("Arquivo não encontrado");
 
     } else {
+
+        img = alocar_matriz();
         
         fgets(text, 10, file);
         fgets(text, 10, file);
@@ -191,8 +197,42 @@ imagem open(imagem img, char nome_arquivo[]){
         sscanf(altura, "%d", &img.altura);
         sscanf(largura, "%d", &img.largura);
 
-        printf("%d\n", img.altura);
-        printf("%d\n", img.largura);
+        qtd_cores = img.altura * img.largura * 3;
+
+        char cores[(qtd_cores + 1) * 12];
+        char vetor_cores[qtd_cores][50];
+
+        fgets(text, 10, file);
+        fgets(cores, qtd_cores * 4 , file);
+
+        //puts(cores);
+
+        split(cores, " ", vetor_cores);
+        
+        img = realocar_matriz(img);
+
+        printf("%d\n", img.matriz[0][0][0]);
+        /*
+        for (int i = 0; i < qtd_cores; ++i)
+        {
+            printf("%s ", vetor_cores[i]);
+        }*/
+
+        int indice = 0;
+        for (int i = 0; i < img.altura; ++i)
+        {
+            for (int j = 0; j< img.largura; ++j)
+            {
+                for (int k = 0; k < 3; ++k)
+                {   
+                    //printf("%s\n", vetor_cores[indice]);
+                    sscanf(vetor_cores[indice], "%d", &img.matriz[i][j][k]);
+                    indice++;
+                }
+            }
+        }
+
+        //printf("%d\n", indice);
     }
 
     return img;

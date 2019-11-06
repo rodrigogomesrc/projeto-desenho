@@ -65,6 +65,8 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
         i++;
     }
     retorno[indice_retorno][indice_str_atual] = '\0'; // fecha a última string
+
+    //printf("%d\n", indice_retorno);
 }
 
 
