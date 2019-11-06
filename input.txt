@@ -14,4 +14,6 @@ line 0 100 199 100
 line 0 0 199 199
 color 0 255 255
 line 199 0 0 199
+color 0 0 0
+polygon 3 90 110 90 160 140 160 
 save

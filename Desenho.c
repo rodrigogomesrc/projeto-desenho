@@ -81,6 +81,56 @@ imagem line(imagem img, int parametros[]) {
     return img;   
 }
 
+imagem polygon(imagem img, comando cmd){
+
+    int qtd_pontos = cmd.parametros[0];
+    int coordenadas = cmd.qtd_parametros -1;
+    int possivel = 1;
+    int parametros[4];
+
+    if(((coordenadas) % 2) != 0){
+
+        puts("não é possivel criar um polígono");
+        possivel = 0;
+    }
+
+    /*
+    //Testar se não tem interceção entre as retas
+    if(){
+
+        possivel = 0;
+    }*/
+
+    if(possivel == 1){
+
+        for (int i = 0; i < coordenadas; i += 2)
+        {
+            if(i == coordenadas - 2) {
+
+                parametros[0] = cmd.parametros[i + 1];
+                parametros[1] = cmd.parametros[i + 2];
+                parametros[2] = cmd.parametros[1];
+                parametros[3] = cmd.parametros[2];
+
+                img = line(img, parametros);
+                
+            } else {
+
+                parametros[0] = cmd.parametros[i + 1];
+                parametros[1] = cmd.parametros[i + 2];
+                parametros[2] = cmd.parametros[i + 3];
+                parametros[3] = cmd.parametros[i + 4];
+                
+                img = line(img, parametros);
+            }
+        }
+
+    }
+
+    return img;
+
+}
+
 imagem color(imagem img, int parametros[]){
     
     img.cor_atual[0] = parametros[0];
@@ -187,6 +237,11 @@ imagem interpretar(comando entrada, imagem img) {
     else if(strcmp(entrada.nome_comando, "open") == 0){
 
         img = open(img, entrada.comando_string);
+    }
+
+    else if(strcmp(entrada.nome_comando, "polygon") == 0){
+
+        img = polygon(img, entrada);
     }
 
     return img;
