@@ -176,92 +176,58 @@ imagem realocar_matriz(imagem img){
     return img;
 }
 
-imagem line(imagem img, int parametros[]){
+imagem line(imagem img, int parametros[]) {
 
     int x0 = parametros[0];
     int x1 = parametros[2];
     int y0 = parametros[1];
     int y1 = parametros[3];
-    int dx, dy, yi, xi, D, y, x;
+    int err, dy, dx, sx, sy, e2;
 
-    printf("X0: %d Y0: %d X1: %d Y1: %d \n",x0, y0, x1, y1);
-    
-    if(x1 < x0 || y1 < y0){
+    dx = abs(x1 - x0);
 
-        x0 = parametros[2];
-        x1 = parametros[0];
-        y0 = parametros[3];
-        y1 = parametros[1];
+    if(x0 < x1){
 
-        printf("X0: %d Y0: %d X1: %d Y1: %d \n",x0, y0, x1, y1);
-
-    }
-
-    dx = x1 - x0;
-    dy = y1 - y0;
-
-    printf("X0: %d X1: %d\n", x0, x1);
-    printf("Y0: %d Y1: %d\n", y0, y1);
-
-    if( abs(y1 - y0) < abs(x1 - x0)){
-
-        puts("primeiro");
-            yi = 1;
-
-            if(dy < 0){
-
-                yi = -1;
-                dy = -dy;
-            }
-            D = 2*dy - dx;
-            y = y0;
-
-            printf("X0: %d X1: %d\n",x0, x1);
-            for (int x = x0; x <= x1; ++x)
-            {
-                printf("Caso 4 X: %d Y: %d\n",x, y);
-                img.matriz[x][y][0] = img.cor_atual[0];
-                img.matriz[x][y][1] = img.cor_atual[1];
-                img.matriz[x][y][2] = img.cor_atual[2];
-
-                if(D > 0){
-                    y += yi;
-                    D -= 2*dx;
-                }
-                D += 2*dy;
-            }
+        sx = 1;
 
     } else {
 
-       puts("segundo");
+        sx = -1;
+    }
 
-            xi = 1;
+    dy = abs(y1 - y0) * -1;
 
-            if(dx < 0){
+    if(y0 < y1){
 
-                xi = -1;
-                dx = -dx;
-            }
-            D = 2*dx - dy;
-            x = x0;
+        sy = 1;
 
-            printf("Y0: %d Y1: %d\n",y0, y1);
+    } else {
 
-            for (y = y0; y <= y1; ++y)
-            {
-                printf("Caso 3 X: %d Y: %d\n",x, y);
-                img.matriz[x][y][0] = img.cor_atual[0];
-                img.matriz[x][y][1] = img.cor_atual[1];
-                img.matriz[x][y][2] = img.cor_atual[2];
+        sy = -1;
+    }
+    
+    err = dx+dy;
+    while (1){
 
-                if(D > 0){
-                    x += xi;
-                    D -= 2*dy;
-                }
-                D += 2*dx;
-            }
-    } 
+        img.matriz[x0][y0][0] = img.cor_atual[0];
+        img.matriz[x0][y0][1] = img.cor_atual[1];
+        img.matriz[x0][y0][2] = img.cor_atual[2];
 
+        if (x0==x1 && y0==y1){
+            break;
+        }
+        e2 = 2*err;
+        if (e2 >= dy){
+
+            err += dy;
+            x0 += sx;
+        }
+        if (e2 <= dx){
+            err += dx;
+            y0 += sy;
+        }
+    }
+    
     return img;   
 }
 
@@ -289,6 +255,8 @@ imagem clear(imagem img, int parametros[]){
 }
  
 imagem open(imagem img, char nome_arquivo[]){
+
+    /*
     FILE *file;
     file = fopen(nome_arquivo, "r");
     if(file == NULL){
@@ -315,7 +283,7 @@ imagem open(imagem img, char nome_arquivo[]){
 
         sscanf(img.largura, "%d", largura);
 
-    }
+    }*/
     return img;
 }
 
