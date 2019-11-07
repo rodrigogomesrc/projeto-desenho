@@ -7,7 +7,7 @@
 
 void save(imagem img){
 
-    FILE *file = fopen("imagem.ppm", "wb");
+    FILE *file = fopen(img.nome_imagem, "wb");
     fprintf(file, "P3\n%d %d\n255\n", img.altura, img.largura);
     
     for (int i = 0; i < img.altura; ++i)
@@ -16,7 +16,6 @@ void save(imagem img){
         {
             for (int z = 0; z < 3; ++z)
             {
-            
                 fprintf(file, "%d ", img.matriz[j][i][z]);
             }
             
@@ -192,10 +191,11 @@ imagem open(imagem img, char nome_arquivo[]){
         strcpy(altura, text_split[0]);
         strcpy(largura, text_split[1]);
         
-        imagem img;
+        strcpy(img.nome_imagem, nome_arquivo_tratado);
 
         sscanf(altura, "%d", &img.altura);
         sscanf(largura, "%d", &img.largura);
+        img = realocar_matriz(img);
 
         qtd_cores = img.altura * img.largura * 3;
 
@@ -205,34 +205,21 @@ imagem open(imagem img, char nome_arquivo[]){
         fgets(text, 10, file);
         fgets(cores, qtd_cores * 4 , file);
 
-        //puts(cores);
-
         split(cores, " ", vetor_cores);
         
-        img = realocar_matriz(img);
-
-        printf("%d\n", img.matriz[0][0][0]);
-        /*
-        for (int i = 0; i < qtd_cores; ++i)
-        {
-            printf("%s ", vetor_cores[i]);
-        }*/
 
         int indice = 0;
         for (int i = 0; i < img.altura; ++i)
         {
-            for (int j = 0; j< img.largura; ++j)
+            for (int j = 0; j < img.largura; ++j)
             {
                 for (int k = 0; k < 3; ++k)
                 {   
-                    //printf("%s\n", vetor_cores[indice]);
-                    sscanf(vetor_cores[indice], "%d", &img.matriz[i][j][k]);
+                    sscanf(vetor_cores[indice], "%d", &img.matriz[j][i][k]);
                     indice++;
                 }
             }
         }
-
-        //printf("%d\n", indice);
     }
 
     return img;
@@ -291,6 +278,8 @@ imagem interpretar(comando entrada, imagem img) {
 void input(char nome_arquivo[]){
 
     imagem img = alocar_matriz();
+
+    strcpy(img.nome_imagem, "imagem.ppm");
 
     FILE *file;
     file = fopen(nome_arquivo, "r");
