@@ -94,36 +94,46 @@ imagem polygon(imagem img, comando cmd){
         possivel = 0;
     }
 
-    /*
-    //Testar se não tem interceção entre as retas
-    if(){
-
-        possivel = 0;
-    }*/
-
     if(possivel == 1){
 
+        int retas[ordenadas][4];
+        int indice_retas = 0;
+
+        //cria as retas
         for (int i = 0; i < ordenadas; i += 2)
         {
             if(i == ordenadas - 2) {
 
-                parametros[0] = cmd.parametros[i + 1];
-                parametros[1] = cmd.parametros[i + 2];
-                parametros[2] = cmd.parametros[1];
-                parametros[3] = cmd.parametros[2];
+                retas[indice_retas][0] = cmd.parametros[i + 1];
+                retas[indice_retas][1] = cmd.parametros[i + 2];
+                retas[indice_retas][2] = cmd.parametros[1];
+                retas[indice_retas][3] = cmd.parametros[2];
 
-                img = line(img, parametros);
+                indice_retas++;
                 
             } else {
 
-                parametros[0] = cmd.parametros[i + 1];
-                parametros[1] = cmd.parametros[i + 2];
-                parametros[2] = cmd.parametros[i + 3];
-                parametros[3] = cmd.parametros[i + 4];
-                
-                img = line(img, parametros);
+                retas[indice_retas][0] = cmd.parametros[i + 1];
+                retas[indice_retas][1] = cmd.parametros[i + 2];
+                retas[indice_retas][2] = cmd.parametros[i + 3];
+                retas[indice_retas][3] = cmd.parametros[i + 4];
+
+                indice_retas++;
             }
         }
+
+        //coloca as retas na imagem.
+        for (int i = 0; i < indice_retas; ++i)
+        {
+            parametros[0] = retas[i][0];
+            parametros[1] = retas[i][1];
+            parametros[2] = retas[i][2];
+            parametros[3] = retas[i][3];
+            img = line(img, parametros);
+
+            //printf("[%d, %d] - [%d, %d]", retas[i][0], retas[i][1], retas[i][2], retas[i][3]);
+        }
+        //printf("\n");
 
     }
 

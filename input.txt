@@ -1,5 +1,5 @@
-open img.ppm
+image 200 200
+clear 255 255 255
 color 0 0 0
 polygon 3 90 110 90 160 140 160 
-polygon 4 10 10 100 10 100 110 10 110
 save
