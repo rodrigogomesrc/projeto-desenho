@@ -5,6 +5,8 @@
 #include "structs.h"
 #include "funcoes.h"
 
+//Salva a imagem no arquivo de acordo com a matriz de pixels
+//Algoritmo adaptado de https://rosettacode.org/wiki/Bitmap/Write_a_PPM_file#C
 void save(imagem img){
 
     FILE *file = fopen(img.nome_imagem, "wb");
@@ -25,6 +27,8 @@ void save(imagem img){
     fclose(file); 
 }
 
+//Função para criar uma reta na imagem
+//Algoritmo adptado de https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases
 imagem line(imagem img, int parametros[]) {
 
     int x0 = parametros[0];
@@ -80,6 +84,7 @@ imagem line(imagem img, int parametros[]) {
     return img;   
 }
 
+//Função para criar uma reta na imagem
 imagem polygon(imagem img, comando cmd){
 
     int qtd_pontos = cmd.parametros[0];
@@ -130,10 +135,7 @@ imagem polygon(imagem img, comando cmd){
             parametros[2] = retas[i][2];
             parametros[3] = retas[i][3];
             img = line(img, parametros);
-
-            //printf("[%d, %d] - [%d, %d]", retas[i][0], retas[i][1], retas[i][2], retas[i][3]);
         }
-        //printf("\n");
 
     }
 
@@ -141,6 +143,7 @@ imagem polygon(imagem img, comando cmd){
 
 }
 
+//Define a cor atual
 imagem color(imagem img, int parametros[]){
     
     img.cor_atual[0] = parametros[0];
@@ -150,6 +153,7 @@ imagem color(imagem img, int parametros[]){
     return img;
 }
 
+//Limpa a imagem deixando todos os pixels com a cor recebida por parâmetro
 imagem clear(imagem img, int parametros[]){
 
     for(int i = 0; i < img.altura; i++)
@@ -165,6 +169,7 @@ imagem clear(imagem img, int parametros[]){
     return img; 
 }
  
+//Abre um arquivo de imagem ppm para edição
 imagem open(imagem img, char nome_arquivo[]){
 
     char text[10];
@@ -235,6 +240,7 @@ imagem open(imagem img, char nome_arquivo[]){
     return img;
 }
 
+//Define a resolução da imagem
 imagem image(imagem img, int parametros[]) {
 
     img.altura = parametros[0];
@@ -244,6 +250,8 @@ imagem image(imagem img, int parametros[]) {
     return img;
 }
 
+/*Recebe a imagem e os comandos vindo do arquivo, chamando a 
+função correspondente com a imagem a ser editada */
 imagem interpretar(comando entrada, imagem img) {
 
     if(strcmp(entrada.nome_comando, "save") == 0){
@@ -284,7 +292,8 @@ imagem interpretar(comando entrada, imagem img) {
     return img;
 
 }
-
+/* Lê o arquivo de comandos, criando uma struct de comando que é passado 
+para a função que interpreta juntamente com uma instância da imagem*/
 void input(char nome_arquivo[]){
 
     imagem img = alocar_matriz();
@@ -294,8 +303,7 @@ void input(char nome_arquivo[]){
     FILE *file;
     file = fopen(nome_arquivo, "r");
 
-    // usar alocação dinâmica nesses vetores
-    char text[50]; // essa variável tem tamanho fixo
+    char text[50]; 
     char entradas[50][50];
     char nome_comando[50];
     int parametros[30];
@@ -327,7 +335,6 @@ void input(char nome_arquivo[]){
             qtd_parametros = 0;
             split(text, " ", entradas);
 
-            // salvando o comando
             strcpy(nome_comando, entradas[0]);
 
             comando instrucao;
@@ -357,8 +364,6 @@ void input(char nome_arquivo[]){
             }
 
             instrucao.qtd_parametros = qtd_parametros;
-
-            //talvez substituir criando uma função para copiar um vetor pra outro
 
             // limpa o vetor de instrução da struct
             for (int i = 0; i < 30; ++i)

@@ -4,11 +4,12 @@
 #include <ctype.h>
 #include "structs.h"
 
+//Divide uma string em um vetor de strings usando um delimitador
 void split(char string_entrada[], char delim[], char retorno[][50]){
  
     int tam_delimitador = 0;
-    int indice_str_atual = 0; // indice da string atual
-    int indice_retorno = 0; // indice da posição no vetor de strings de retorno
+    int indice_str_atual = 0; 
+    int indice_retorno = 0; 
  
     while(delim[tam_delimitador] != '\0'){
         tam_delimitador++;
@@ -16,8 +17,7 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
  
     int i = 0;
     while(string_entrada[i] != '\0'){
- 
-        // Se encontrar um primeiro caractere igual ao delimitador, compara os próximos com os próximos do delimitador
+
         if(string_entrada[i] == delim[0]){
  
             int corresponde = 1;
@@ -26,28 +26,22 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
             {
                 loops++;
  
-                //testa cada caractere da string seguindo com até o último do delimitador
                 if(string_entrada[i + j] != delim[j] ){
  
                     corresponde = 0;
                     break;
                 }
             }
-            //se encontrou uma sequência igual ao delimitador
+
             if(corresponde == 1){
  
                 retorno[indice_retorno][indice_str_atual] = '\0';
-                i += tam_delimitador -1; // pula o delimitador
-                indice_retorno++; // vai para a próxima string
-                indice_str_atual = 0; // para começar a pegar o começo da próxima string
+                i += tam_delimitador -1; 
+                indice_retorno++; 
+                indice_str_atual = 0; 
  
             } else {
  
-                /*
-                Quando no meio do processo de comparar as strings com as do delimitador
-                é percebido que não são iguais, joga as que foi comparadas no vetor de retorno
-                e pula pra depois delas
-                */
                 for (int l = i; l <= i + loops; ++l)
                 {
                     retorno[indice_retorno][indice_str_atual] = string_entrada[l];
@@ -58,18 +52,15 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
  
         } else {
  
-            // vai colocando a string no vetor de strings até encontrar o delimitador
             retorno[indice_retorno][indice_str_atual] = string_entrada[i];
             indice_str_atual++;
         }
         i++;
     }
-    retorno[indice_retorno][indice_str_atual] = '\0'; // fecha a última string
-
-    //printf("%d\n", indice_retorno);
+    retorno[indice_retorno][indice_str_atual] = '\0'; 
 }
 
-
+//Retira os espaços em branco e caracteres que não são alfanuméricos ou em branco
 void limpar_string_arquivo(char entrada[], char saida[]){
 
     int i = 0;
@@ -88,6 +79,7 @@ void limpar_string_arquivo(char entrada[], char saida[]){
     }
 }
 
+//Limpa a matriz que representa a imagem na memória
 void desalocar_matriz(imagem img){
 
     for (int i = 0; i < img.altura; ++i)
@@ -105,9 +97,9 @@ void desalocar_matriz(imagem img){
     }
 
     free(img.matriz);
-
 }
 
+//Cria uma imagem com uma alocação inicial na memória
 imagem alocar_matriz(){
 
     imagem img;
@@ -132,7 +124,7 @@ imagem alocar_matriz(){
     return img;
 }
 
-
+//Realoca a matriz que representa a imagem na memória de acordo com resolução desejada
 imagem realocar_matriz(imagem img){
 
     img.matriz = realloc(img.matriz, sizeof(int**) * img.altura);
