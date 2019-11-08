@@ -2,4 +2,4 @@ image 200 200
 clear 255 255 255
 color 0 0 0
 polygon 3 90 110 90 160 140 160 
-save
+save nova_imagem.ppm
