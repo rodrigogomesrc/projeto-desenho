@@ -1,5 +1,8 @@
-image 200 200
+open nova_imagem2.ppm
 clear 255 255 255
-color 0 0 0
+color 255 0 0
 polygon 3 90 110 90 160 140 160 
-save nova_imagem.ppm
+color 0 255 0
+polygon 3 150 170 150 210 200 220 
+line 90 110 150 220 
+save nova_imagem3.ppm

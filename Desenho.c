@@ -167,13 +167,17 @@ imagem open(imagem img, char nome_arquivo[]){
     char nome_arquivo_tratado[30];
     int qtd_cores;
 
-
     for (int i = 0; i < 30; ++i)
     {
         nome_arquivo_tratado[i] = '\0';
     }
 
     limpar_string_arquivo(nome_arquivo, nome_arquivo_tratado);
+
+    puts("Nome Arquivo:");
+    puts(nome_arquivo);
+    puts("Nome Arquivo Tratado:");
+    puts(nome_arquivo_tratado);
 
     FILE *file;
     file = fopen(nome_arquivo_tratado, "r");

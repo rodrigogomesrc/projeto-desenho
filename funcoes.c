@@ -66,17 +66,22 @@ void limpar_string_arquivo(char entrada[], char saida[]){
     int i = 0;
     while(1){
 
-        if(isalpha(entrada[i]) || entrada[i] == '.'){
+        if(isalpha(entrada[i]) || entrada[i] == '.' || entrada[i] == '_'){
 
             saida[i] = entrada[i];
+            printf("-> %c\n", saida[i]);
+            puts(saida);
+        } 
 
-        } else if(entrada[i] == '\0'){
+        else if(entrada[i] == '\0'){
 
             break;
         }
 
         i++;
     }
+    puts("\nSaída");
+    puts(saida);
 }
 
 //Limpa a matriz que representa a imagem na memória
