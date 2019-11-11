@@ -60,28 +60,38 @@ void split(char string_entrada[], char delim[], char retorno[][50]){
     retorno[indice_retorno][indice_str_atual] = '\0'; 
 }
 
+int numero(char entrada){
+
+    int i = 0;
+    int indice = 0;
+    int numeros[] = {'1','2','3','4','5','6','7','8','9','0'};
+
+    for (int i = 0; i < 10; ++i)
+    {
+       if(entrada == numeros[i]){
+            return 1;
+       }
+    }
+    return 0;
+}
+
 //Retira os espaços em branco e caracteres que não são alfanuméricos ou em branco
 void limpar_string_arquivo(char entrada[], char saida[]){
 
     int i = 0;
     while(1){
 
-        if(isalpha(entrada[i]) || entrada[i] == '.' || entrada[i] == '_'){
+        if(isalpha(entrada[i]) || entrada[i] == '.' || entrada[i] == '_' || numero(entrada[i])){
 
             saida[i] = entrada[i];
-            printf("-> %c\n", saida[i]);
-            puts(saida);
-        } 
 
-        else if(entrada[i] == '\0'){
+        } else if(entrada[i] == '\0'){
 
             break;
         }
 
         i++;
     }
-    puts("\nSaída");
-    puts(saida);
 }
 
 //Limpa a matriz que representa a imagem na memória

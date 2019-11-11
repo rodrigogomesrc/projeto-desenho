@@ -89,42 +89,54 @@ imagem polygon(imagem img, comando cmd){
 
     int qtd_pontos = cmd.parametros[0];
     int ordenadas = cmd.qtd_parametros -1;
+    int possivel = 1;
     int parametros[4];
     double det;
-    int retas[ordenadas][4];
-    int indice_retas = 0;
 
-    //cria as retas
-    for (int i = 0; i < ordenadas; i += 2)
-    {
-        if(i == ordenadas - 2) {
+    if(((ordenadas) % 2) != 0){
 
-            retas[indice_retas][0] = cmd.parametros[i + 1];
-            retas[indice_retas][1] = cmd.parametros[i + 2];
-            retas[indice_retas][2] = cmd.parametros[1];
-            retas[indice_retas][3] = cmd.parametros[2];
-
-            indice_retas++;
-                
-        } else {
-
-            retas[indice_retas][0] = cmd.parametros[i + 1];
-            retas[indice_retas][1] = cmd.parametros[i + 2];
-            retas[indice_retas][2] = cmd.parametros[i + 3];
-            retas[indice_retas][3] = cmd.parametros[i + 4];
-
-            indice_retas++;
-        }
+        puts("não é possivel criar um polígono");
+        possivel = 0;
     }
 
-    //coloca as retas na imagem.
-    for (int i = 0; i < indice_retas; ++i)
-    {
-        parametros[0] = retas[i][0];
-        parametros[1] = retas[i][1];
-        parametros[2] = retas[i][2];
-        parametros[3] = retas[i][3];
-        img = line(img, parametros);
+    if(possivel == 1){
+
+        int retas[ordenadas][4];
+        int indice_retas = 0;
+
+        //cria as retas
+        for (int i = 0; i < ordenadas; i += 2)
+        {
+            if(i == ordenadas - 2) {
+
+                retas[indice_retas][0] = cmd.parametros[i + 1];
+                retas[indice_retas][1] = cmd.parametros[i + 2];
+                retas[indice_retas][2] = cmd.parametros[1];
+                retas[indice_retas][3] = cmd.parametros[2];
+
+                indice_retas++;
+                
+            } else {
+
+                retas[indice_retas][0] = cmd.parametros[i + 1];
+                retas[indice_retas][1] = cmd.parametros[i + 2];
+                retas[indice_retas][2] = cmd.parametros[i + 3];
+                retas[indice_retas][3] = cmd.parametros[i + 4];
+
+                indice_retas++;
+            }
+        }
+
+        //coloca as retas na imagem.
+        for (int i = 0; i < indice_retas; ++i)
+        {
+            parametros[0] = retas[i][0];
+            parametros[1] = retas[i][1];
+            parametros[2] = retas[i][2];
+            parametros[3] = retas[i][3];
+            img = line(img, parametros);
+        }
+
     }
 
     return img;
@@ -174,11 +186,6 @@ imagem open(imagem img, char nome_arquivo[]){
 
     limpar_string_arquivo(nome_arquivo, nome_arquivo_tratado);
 
-    puts("Nome Arquivo:");
-    puts(nome_arquivo);
-    puts("Nome Arquivo Tratado:");
-    puts(nome_arquivo_tratado);
-
     FILE *file;
     file = fopen(nome_arquivo_tratado, "r");
 
@@ -213,7 +220,6 @@ imagem open(imagem img, char nome_arquivo[]){
         fgets(cores, qtd_cores * 4 , file);
 
         split(cores, " ", vetor_cores);
-        
 
         int indice = 0;
         for (int i = 0; i < img.altura; ++i)
@@ -332,7 +338,7 @@ void input(char nome_arquivo[]){
             comando instrucao;
             strcpy(instrucao.nome_comando, nome_comando);
 
-            if(strcmp(nome_comando, "open") == 0 || strcmp(nome_comando, "save") == 0){
+            if(strcmp(nome_comando, "open") == 0 || strcmp(nome_comando, "save") == 0 ){
 
                  strcpy(instrucao.comando_string, entradas[1]);
             }
