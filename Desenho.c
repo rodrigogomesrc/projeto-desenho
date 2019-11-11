@@ -169,6 +169,26 @@ imagem clear(imagem img, int parametros[]){
 
     return img; 
 }
+imagem rect(imagem img, int parametros[]){
+    comando cmd;
+
+    cmd.qtd_parametros = 9;
+
+    cmd.parametros[0] = parametros[0];
+    cmd.parametros[1] = parametros[1];
+    cmd.parametros[2] = parametros[0] + parametros[2];
+    cmd.parametros[3] = parametros[1];
+    cmd.parametros[2] = parametros[0] + parametros[2];
+    cmd.parametros[3] = parametros[1] + parametros[3];
+    cmd.parametros[2] = parametros[0];
+    cmd.parametros[3] = parametros[1] + parametros[3];
+
+    img = polygon(img, cmd);
+
+    return img;
+
+}
+
  
 //Abre um arquivo de imagem ppm para edição
 imagem open(imagem img, char nome_arquivo[]){
@@ -288,6 +308,10 @@ imagem interpretar(comando entrada, imagem img) {
     else if(strcmp(entrada.nome_comando, "polygon") == 0){
 
         img = polygon(img, entrada);
+    }
+    else if(strcmp(entrada.nome_comando, "rect") == 0)
+    {
+        img = rect(img, entrada.parametros);
     }
 
     return img;

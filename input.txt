@@ -1,4 +1,4 @@
-open nova_imagem6.ppm
+image  500 500
 color 0 0 0
-line 100 0 100 199
-save nova_imagem7.ppm
+rect 100 200 160 200
+save nova_imagem10.ppm
