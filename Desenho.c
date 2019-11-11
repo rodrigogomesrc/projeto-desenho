@@ -12,13 +12,13 @@ void save(imagem img, char nome_arquivo[]){
     FILE *file = fopen(nome_arquivo, "wb");
     fprintf(file, "P3\n%d %d\n255\n", img.altura, img.largura);
     
-    for (int i = 0; i < img.altura; ++i)
+    for (int i = 0; i < img.largura; ++i)
     {
-        for (int j = 0; j < img.largura; ++j)
+        for (int j = 0; j < img.altura; ++j)
         {
             for (int z = 0; z < 3; ++z)
-            {
-                fprintf(file, "%d ", img.matriz[j][i][z]);
+            {   
+                fprintf(file, "%d ", img.matriz[i][j][z]);
             }
             
         }
@@ -62,9 +62,9 @@ imagem line(imagem img, int parametros[]) {
     err = dx+dy;
     while (1){
 
-        img.matriz[x0][y0][0] = img.cor_atual[0];
-        img.matriz[x0][y0][1] = img.cor_atual[1];
-        img.matriz[x0][y0][2] = img.cor_atual[2];
+        img.matriz[y0][x0][0] = img.cor_atual[0];
+        img.matriz[y0][x0][1] = img.cor_atual[1];
+        img.matriz[y0][x0][2] = img.cor_atual[2];
 
         if (x0==x1 && y0==y1){
             break;
@@ -156,14 +156,15 @@ imagem color(imagem img, int parametros[]){
 //Limpa a imagem deixando todos os pixels com a cor recebida por parâmetro
 imagem clear(imagem img, int parametros[]){
 
-    for(int i = 0; i < img.altura; i++)
+    for(int i = 0; i < img.largura; i++)
     {
-        for (int j = 0; j < img.largura; ++j)
-        {
+        for (int j = 0; j < img.altura; ++j)
+        {   
+
             img.matriz[i][j][0] = parametros[0];
             img.matriz[i][j][1] = parametros[1];
             img.matriz[i][j][2] = parametros[2];
-        } 
+        }
     }
 
     return img; 
@@ -216,6 +217,7 @@ imagem open(imagem img, char nome_arquivo[]){
         char cores[(qtd_cores + 1) * 12];
         char vetor_cores[qtd_cores][50];
 
+        //erro na linha de baixo para imagens retangulares
         fgets(text, 10, file);
         fgets(cores, qtd_cores * 4 , file);
 
@@ -228,12 +230,13 @@ imagem open(imagem img, char nome_arquivo[]){
             {
                 for (int k = 0; k < 3; ++k)
                 {   
-                    sscanf(vetor_cores[indice], "%d", &img.matriz[j][i][k]);
+                    sscanf(vetor_cores[indice], "%d", &img.matriz[i][j][k]);
                     indice++;
                 }
             }
         }
     }
+
 
     return img;
 }

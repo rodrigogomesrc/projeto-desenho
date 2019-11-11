@@ -1,6 +1,4 @@
-open imagem_2.ppm
-clear 0 0 0
-color 255 255 255
-line 0 0 150 150
-line 0 100 199 100
-save nova_imagem3.ppm
+open nova_imagem6.ppm
+color 0 0 0
+line 100 0 100 199
+save nova_imagem7.ppm

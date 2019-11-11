@@ -97,16 +97,16 @@ void limpar_string_arquivo(char entrada[], char saida[]){
 //Limpa a matriz que representa a imagem na memória
 void desalocar_matriz(imagem img){
 
-    for (int i = 0; i < img.altura; ++i)
+    for (int i = 0; i < img.largura; ++i)
     {
-        for (int j = 0; j < img.largura; ++j)
+        for (int j = 0; j < img.altura; ++j)
         {
             free(img.matriz[i][j]);
                   
         }
     }
 
-    for (int i = 0; i < img.altura; ++i)
+    for (int i = 0; i < img.largura; ++i)
     {
         free(img.matriz[i]);
     }
@@ -142,16 +142,16 @@ imagem alocar_matriz(){
 //Realoca a matriz que representa a imagem na memória de acordo com resolução desejada
 imagem realocar_matriz(imagem img){
 
-    img.matriz = realloc(img.matriz, sizeof(int**) * img.altura);
+    img.matriz = realloc(img.matriz, sizeof(int**) * img.largura);
   
-    for (int i = 0; i < img.altura; ++i)
+    for (int i = 0; i < img.largura; ++i)
     {
-        img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.largura);
+        img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.altura);
     }
 
-    for (int i = 0; i < img.altura; ++i)
+    for (int i = 0; i < img.largura; ++i)
     {
-        for (int j = 0; j < img.largura; ++j)
+        for (int j = 0; j < img.altura; ++j)
         {
             img.matriz[i][j] = realloc(img.matriz[i][j], sizeof(int) * 3); 
         }
