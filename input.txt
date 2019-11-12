@@ -1,4 +1,6 @@
-image  500 500
+image 500 500
+clear 255 255 255
 color 0 0 0
-rect 100 200 160 200
+rect 100 100 200 100 
+polygon 3 10 10 10 200 100 200
 save nova_imagem10.ppm
