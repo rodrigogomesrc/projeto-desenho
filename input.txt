@@ -1,6 +1,4 @@
-image 500 500
+imagem 250 200
 clear 255 255 255
-color 0 0 0
-rect 100 100 200 100 
-polygon 3 10 10 10 200 100 200
-save nova_imagem10.ppm
+line 0 0 150 150
+save test4.ppm

@@ -115,47 +115,30 @@ void desalocar_matriz(imagem img){
 }
 
 //Cria uma imagem com uma alocação inicial na memória
-imagem alocar_matriz(){
+imagem* alocar_matriz(){
 
-    imagem img;
-
-    img.matriz = calloc(1, sizeof(int**));
-  
-    for (int i = 0; i < 1; ++i)
-    {
-        img.matriz[i] = calloc(1, sizeof(int*));
-        
-    }
-
-    for (int i = 0; i < 1; ++i)
-    {
-        for (int j = 0; j < 1; ++j)
-        {
-            img.matriz[i][j] = calloc(3, sizeof(int));
-           
-        }
-    }
+    imagem *img = malloc(sizeof(imagem));
 
     return img;
 }
 
 //Realoca a matriz que representa a imagem na memória de acordo com resolução desejada
-imagem realocar_matriz(imagem img){
+void realocar_matriz(imagem *img){
 
-    img.matriz = realloc(img.matriz, sizeof(int**) * img.largura);
+    img->matriz = realloc(img->matriz, sizeof(int**) * img->altura);
   
-    for (int i = 0; i < img.largura; ++i)
+    for (int i = 0; i < img->altura; ++i)
     {
-        img.matriz[i] = realloc(img.matriz[i], sizeof(int*) * img.altura);
+        img->matriz[i] = realloc(img->matriz[i], sizeof(int*) * img->largura);
     }
 
-    for (int i = 0; i < img.largura; ++i)
+    for (int i = 0; i < img->altura; ++i)
     {
-        for (int j = 0; j < img.altura; ++j)
+        for (int j = 0; j < img->largura; ++j)
         {
-            img.matriz[i][j] = realloc(img.matriz[i][j], sizeof(int) * 3); 
+            img->matriz[i][j] = realloc(img->matriz[i][j], sizeof(int) * 3); 
         }
     }
 
-    return img;
+    //return img;
 }

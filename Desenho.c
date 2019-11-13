@@ -7,18 +7,18 @@
 
 //Salva a imagem no arquivo de acordo com a matriz de pixels
 //Algoritmo adaptado de https://rosettacode.org/wiki/Bitmap/Write_a_PPM_file#C
-void save(imagem img, char nome_arquivo[]){
+void save(imagem *img, char nome_arquivo[]){
 
     FILE *file = fopen(nome_arquivo, "wb");
-    fprintf(file, "P3\n%d %d\n255\n", img.altura, img.largura);
+    fprintf(file, "P3\n%d %d\n255\n", img->altura, img->largura);
     
-    for (int i = 0; i < img.largura; ++i)
+    for (int i = 0; i < img->largura; ++i)
     {
-        for (int j = 0; j < img.altura; ++j)
+        for (int j = 0; j < img->altura; ++j)
         {
             for (int z = 0; z < 3; ++z)
             {   
-                fprintf(file, "%d ", img.matriz[i][j][z]);
+                fprintf(file, "%d ", img->matriz[i][j][z]);
             }
             
         }
@@ -29,7 +29,7 @@ void save(imagem img, char nome_arquivo[]){
 
 //Função para criar uma reta na imagem
 //Algoritmo adptado de https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases
-imagem line(imagem img, int parametros[]) {
+void line(imagem *img, int parametros[]) {
 
     int x0 = parametros[0];
     int x1 = parametros[2];
@@ -62,9 +62,9 @@ imagem line(imagem img, int parametros[]) {
     err = dx+dy;
     while (1){
 
-        img.matriz[y0][x0][0] = img.cor_atual[0];
-        img.matriz[y0][x0][1] = img.cor_atual[1];
-        img.matriz[y0][x0][2] = img.cor_atual[2];
+        img->matriz[y0][x0][0] = img->cor_atual[0];
+        img->matriz[y0][x0][1] = img->cor_atual[1];
+        img->matriz[y0][x0][2] = img->cor_atual[2];
 
         if (x0==x1 && y0==y1){
             break;
@@ -80,17 +80,14 @@ imagem line(imagem img, int parametros[]) {
             y0 += sy;
         }
     }
-
-    return img;   
 }
 
 //Função para criar uma reta na imagem
-imagem polygon(imagem img, comando cmd){
+void polygon(imagem *img, comando cmd){
 
     int qtd_pontos = cmd.parametros[0];
     int ordenadas = cmd.qtd_parametros -1;
     int parametros[4];
-    double det;
 
     int retas[ordenadas][4];
     int indice_retas = 0;
@@ -125,41 +122,37 @@ imagem polygon(imagem img, comando cmd){
         parametros[1] = retas[i][1];
         parametros[2] = retas[i][2];
         parametros[3] = retas[i][3];
-        img = line(img, parametros);
+        line(img, parametros);
     }
-
-    return img;
 }
 
 //Define a cor atual
-imagem color(imagem img, int parametros[]){
+void color(imagem *img, int parametros[]){
     
-    img.cor_atual[0] = parametros[0];
-    img.cor_atual[1] = parametros[1];
-    img.cor_atual[2] = parametros[2];
+    img->cor_atual[0] = parametros[0];
+    img->cor_atual[1] = parametros[1];
+    img->cor_atual[2] = parametros[2];
 
-    return img;
 }
 
 //Limpa a imagem deixando todos os pixels com a cor recebida por parâmetro
-imagem clear(imagem img, int parametros[]){
+void clear(imagem *img, int parametros[]){
 
-    for(int i = 0; i < img.largura; i++)
+    for(int i = 0; i < img->altura; i++)
     {
-        for (int j = 0; j < img.altura; ++j)
+        for (int j = 0; j < img->largura; ++j)
         {   
 
-            img.matriz[i][j][0] = parametros[0];
-            img.matriz[i][j][1] = parametros[1];
-            img.matriz[i][j][2] = parametros[2];
+            img->matriz[i][j][0] = parametros[0];
+            img->matriz[i][j][1] = parametros[1];
+            img->matriz[i][j][2] = parametros[2];
         }
     }
 
-    return img; 
 }
 
 //Cria retângulos
-imagem rect(imagem img, int parametros[]){
+void rect(imagem *img, int parametros[]){
 
     comando cmd;
 
@@ -175,16 +168,14 @@ imagem rect(imagem img, int parametros[]){
     cmd.parametros[7] = parametros[0];
     cmd.parametros[8] = parametros[1] + parametros[3];
 
-    img = polygon(img, cmd);
-
-    return img;
+    polygon(img, cmd);
 
 }
  
 //Abre um arquivo de imagem ppm para edição
-imagem open(imagem img, char nome_arquivo[]){
+void open(imagem *img, char nome_arquivo[]){
 
-    char text[10];
+    char text[15];
     char text_split[3][50];
     char altura[5];
     char largura[5];
@@ -207,8 +198,6 @@ imagem open(imagem img, char nome_arquivo[]){
 
     } else {
 
-        img = alocar_matriz();
-        
         fgets(text, 10, file);
         fgets(text, 10, file);
         
@@ -217,54 +206,49 @@ imagem open(imagem img, char nome_arquivo[]){
         strcpy(altura, text_split[0]);
         strcpy(largura, text_split[1]);
         
-        strcpy(img.nome_imagem, nome_arquivo_tratado);
+        strcpy(img->nome_imagem, nome_arquivo_tratado);
 
-        sscanf(altura, "%d", &img.altura);
-        sscanf(largura, "%d", &img.largura);
-        img = realocar_matriz(img);
+        sscanf(altura, "%d", &img->altura);
+        sscanf(largura, "%d", &img->largura);
+        realocar_matriz(img);
 
-        qtd_cores = img.altura * img.largura * 3;
+        qtd_cores = img->altura * img->largura * 3;
 
         char cores[(qtd_cores + 1) * 12];
         char vetor_cores[qtd_cores][50];
 
-        //erro na linha de baixo para imagens retangulares
-        fgets(text, 10, file);
+        fgets(text, 15, file);
         fgets(cores, qtd_cores * 4 , file);
 
         split(cores, " ", vetor_cores);
 
         int indice = 0;
-        for (int i = 0; i < img.altura; ++i)
+        for (int i = 0; i < img->altura; ++i)
         {
-            for (int j = 0; j < img.largura; ++j)
+            for (int j = 0; j < img->largura; ++j)
             {
                 for (int k = 0; k < 3; ++k)
                 {   
-                    sscanf(vetor_cores[indice], "%d", &img.matriz[i][j][k]);
+                    sscanf(vetor_cores[indice], "%d", &img->matriz[i][j][k]);
                     indice++;
                 }
             }
         }
     }
 
-
-    return img;
 }
 
 //Define a resolução da imagem
-imagem image(imagem img, int parametros[]) {
+void image(imagem *img, int parametros[]) {
 
-    img.altura = parametros[0];
-    img.largura = parametros[1];
-    img = realocar_matriz(img);
-
-    return img;
+    img->altura = parametros[0];
+    img->largura = parametros[1];
+    realocar_matriz(img);
 }
 
 /*Recebe a imagem e os comandos vindo do arquivo, chamando a 
 função correspondente com a imagem a ser editada */
-imagem interpretar(comando entrada, imagem img) {
+void interpretar(comando entrada, imagem *img) {
 
     if(strcmp(entrada.nome_comando, "save") == 0){
 
@@ -273,46 +257,45 @@ imagem interpretar(comando entrada, imagem img) {
 
     else if(strcmp(entrada.nome_comando, "image") == 0){
 
-        img = image(img, entrada.parametros);   
+        image(img, entrada.parametros);   
     }
 
     else if(strcmp(entrada.nome_comando, "color") == 0){
 
-        img = color(img, entrada.parametros);
+        color(img, entrada.parametros);
     }
 
     else if(strcmp(entrada.nome_comando, "clear") == 0){
 
-        img = clear(img, entrada.parametros);
+        clear(img, entrada.parametros);
     }
 
     else if(strcmp(entrada.nome_comando, "line") == 0){
 
-        img = line(img, entrada.parametros);
+        line(img, entrada.parametros);
     }
 
     else if(strcmp(entrada.nome_comando, "open") == 0){
 
-        img = open(img, entrada.comando_string);
+        open(img, entrada.comando_string);
     }
 
     else if(strcmp(entrada.nome_comando, "polygon") == 0){
 
-        img = polygon(img, entrada);
-    }
-    else if(strcmp(entrada.nome_comando, "rect") == 0)
-    {
-        img = rect(img, entrada.parametros);
+        polygon(img, entrada);
     }
 
-    return img;
+    else if(strcmp(entrada.nome_comando, "rect") == 0){
+
+        rect(img, entrada.parametros);
+    }
 
 }
 /* Lê o arquivo de comandos, criando uma struct de comando que é passado 
 para a função que interpreta juntamente com uma instância da imagem*/
 void input(char nome_arquivo[]){
 
-    imagem img = alocar_matriz();
+    imagem img;// = alocar_matriz();
 
     strcpy(img.nome_imagem, "imagem.ppm");
 
@@ -393,7 +376,7 @@ void input(char nome_arquivo[]){
                instrucao.parametros[i] = parametros[i];
             }
             
-            img = interpretar(instrucao, img);
+            interpretar(instrucao, &img);
 
             //limpa os vetores para guardar novos valores
             for (int i = 0; i < 30; ++i)

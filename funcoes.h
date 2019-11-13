@@ -9,8 +9,8 @@ void retira_barraN(char entrada[], char saida[]);
 
 void desalocar_matriz(imagem img);
 
-imagem alocar_matriz();
+imagem* alocar_matriz();
 
-imagem realocar_matriz(imagem img);
+void realocar_matriz(imagem *img);
 
 #endif
