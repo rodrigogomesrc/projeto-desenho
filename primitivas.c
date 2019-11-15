@@ -61,9 +61,12 @@ void line(imagem *img, int parametros[]) {
     err = dx+dy;
     while (1){
 
-        img->matriz[y0][x0][0] = img->cor_atual[0];
-        img->matriz[y0][x0][1] = img->cor_atual[1];
-        img->matriz[y0][x0][2] = img->cor_atual[2];
+        for (int i = 0; i < 3; ++i)
+        {
+
+           img->matriz[y0][x0][i] = img->cor_atual[i];
+
+        }
 
         if (x0==x1 && y0==y1){
             break;
@@ -117,10 +120,13 @@ void polygon(imagem *img, comando cmd){
     //coloca as retas na imagem.
     for (int i = 0; i < indice_retas; ++i)
     {
-        parametros[0] = retas[i][0];
-        parametros[1] = retas[i][1];
-        parametros[2] = retas[i][2];
-        parametros[3] = retas[i][3];
+        for (int j = 0; j < 4; ++j)
+        {
+
+            parametros[j] = retas[i][j];  
+
+        }
+
         line(img, parametros);
     }
 }
@@ -128,10 +134,10 @@ void polygon(imagem *img, comando cmd){
 //Define a cor atual
 void color(imagem *img, int parametros[]){
     
-    img->cor_atual[0] = parametros[0];
-    img->cor_atual[1] = parametros[1];
-    img->cor_atual[2] = parametros[2];
-
+    for (int i = 0; i < 3; ++i)
+    {
+        img->cor_atual[i] = parametros[i];
+    }
 }
 
 //Limpa a imagem deixando todos os pixels com a cor recebida por parâmetro
