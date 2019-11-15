@@ -170,6 +170,56 @@ void rect(imagem *img, int parametros[]){
     polygon(img, cmd);
 
 }
+
+//Cria círculos
+//Algoritmo adaptado de https://rosettacode.org/wiki/Bitmap/Midpoint_circle_algorithm#C
+void circle(imagem *img, int parametros[]){
+
+    int raio = parametros[2];
+    int x0 = parametros[0] + raio;
+    int y0 = parametros[1] + raio;
+    
+    int f = 1 - raio;
+    int ddF_x = 0;
+    int ddF_y = -2 * raio;
+    int x = 0;
+    int y = raio;
+
+
+    for (int i = 0; i < 3; ++i)
+    {
+        img->matriz[x0][y0 + raio][i] = img->cor_atual[i];
+        img->matriz[x0][y0 - raio][i] = img->cor_atual[i];
+        img->matriz[x0 + raio][y0][i] = img->cor_atual[i];
+        img->matriz[x0 - raio][y0][i] = img->cor_atual[i];
+    }
+
+    while(x < y){
+
+        if(f >= 0){
+            y--;
+            ddF_y += 2;
+            f += ddF_y;
+        }
+        x++;
+        ddF_x += 2;
+        f += ddF_x + 1;
+
+        for (int i = 0; i < 3; ++i)
+        {
+            img->matriz[x0 + x][y0 + y][i] = img->cor_atual[i];
+            img->matriz[x0 - x][y0 + y][i] = img->cor_atual[i];
+            img->matriz[x0 + x][y0 - y][i] = img->cor_atual[i];
+            img->matriz[x0 - x][y0 - y][i] = img->cor_atual[i];
+            img->matriz[x0 + y][y0 + x][i] = img->cor_atual[i];
+            img->matriz[x0 - y][y0 + x][i] = img->cor_atual[i];
+            img->matriz[x0 + y][y0 - x][i] = img->cor_atual[i];
+            img->matriz[x0 - y][y0 - x][i] = img->cor_atual[i];
+        }
+
+    }
+
+}
  
 //Abre um arquivo de imagem ppm para edição
 void open(imagem *img, char nome_arquivo[]){

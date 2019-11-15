@@ -7,6 +7,8 @@ void line(imagem *img, int parametros[]);
 
 void polygon(imagem *img, comando cmd);
 
+void circle(imagem *img, int parametros[]);
+
 void color(imagem *img, int parametros[]);
 
 void clear(imagem *img, int parametros[]);
