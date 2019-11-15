@@ -2,4 +2,6 @@ open test5.ppm
 clear 0 0 0
 color 255 255 255
 line 0 100 150 100
+polygon 3 50 50 150 50 150 150
+rect 0 0 30 30
 save test5.ppm

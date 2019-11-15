@@ -254,46 +254,46 @@ void image(imagem *img, int parametros[]) {
 
 /*Recebe a imagem e os comandos vindo do arquivo, chamando a 
 função correspondente com a imagem a ser editada */
-void interpretar(comando entrada, imagem *img) {
+void interpretar(comando *entrada, imagem *img) {
 
-    if(strcmp(entrada.nome_comando, "save") == 0){
+    if(strcmp(entrada->nome_comando, "save") == 0){
 
-        save(img, entrada.comando_string);
+        save(img, entrada->comando_string);
     }
 
-    else if(strcmp(entrada.nome_comando, "image") == 0){
+    else if(strcmp(entrada->nome_comando, "image") == 0){
 
-        image(img, entrada.parametros);   
+        image(img, entrada->parametros);   
     }
 
-    else if(strcmp(entrada.nome_comando, "color") == 0){
+    else if(strcmp(entrada->nome_comando, "color") == 0){
 
-        color(img, entrada.parametros);
+        color(img, entrada->parametros);
     }
 
-    else if(strcmp(entrada.nome_comando, "clear") == 0){
+    else if(strcmp(entrada->nome_comando, "clear") == 0){
 
-        clear(img, entrada.parametros);
+        clear(img, entrada->parametros);
     }
 
-    else if(strcmp(entrada.nome_comando, "line") == 0){
+    else if(strcmp(entrada->nome_comando, "line") == 0){
 
-        line(img, entrada.parametros);
+        line(img, entrada->parametros);
     }
 
-    else if(strcmp(entrada.nome_comando, "open") == 0){
+    else if(strcmp(entrada->nome_comando, "open") == 0){
 
-        open(img, entrada.comando_string);
+        open(img, entrada->comando_string);
     }
 
-    else if(strcmp(entrada.nome_comando, "polygon") == 0){
+    else if(strcmp(entrada->nome_comando, "polygon") == 0){
 
-        polygon(img, entrada);
+        polygon(img, *entrada);
     }
 
-    else if(strcmp(entrada.nome_comando, "rect") == 0){
+    else if(strcmp(entrada->nome_comando, "rect") == 0){
 
-        rect(img, entrada.parametros);
+        rect(img, entrada->parametros);
     }
 
 }
@@ -383,7 +383,7 @@ void input(char nome_arquivo[]){
                instrucao.parametros[i] = parametros[i];
             }
             
-            interpretar(instrucao, &img);
+            interpretar(&instrucao, &img);
 
             //limpa os vetores para guardar novos valores
             for (int i = 0; i < 30; ++i)
