@@ -10,11 +10,11 @@
 void save(imagem *img, char nome_arquivo[]){
 
     FILE *file = fopen(nome_arquivo, "wb");
-    fprintf(file, "P3\n%d %d\n255\n", img->altura, img->largura);
+    fprintf(file, "P3\n%d %d\n255\n", img->largura, img->altura);
     
-    for (int i = 0; i < img->largura; ++i)
+    for (int i = 0; i < img->altura; ++i)
     {
-        for (int j = 0; j < img->altura; ++j)
+        for (int j = 0; j < img->largura; ++j)
         {
             for (int z = 0; z < 3; ++z)
             {   
@@ -203,14 +203,18 @@ void open(imagem *img, char nome_arquivo[]){
         
         split(text, " ", text_split);
         
-        strcpy(altura, text_split[0]);
-        strcpy(largura, text_split[1]);
+        strcpy(altura, text_split[1]);
+        strcpy(largura, text_split[0]);
         
         strcpy(img->nome_imagem, nome_arquivo_tratado);
 
         sscanf(altura, "%d", &img->altura);
         sscanf(largura, "%d", &img->largura);
+
         realocar_matriz(img);
+
+        printf(">>>Altura: %d\n", img->altura);
+        printf(">>>Largura: %d\n", img->largura);
 
         qtd_cores = img->altura * img->largura * 3;
 
@@ -241,8 +245,10 @@ void open(imagem *img, char nome_arquivo[]){
 //Define a resolução da imagem
 void image(imagem *img, int parametros[]) {
 
-    img->altura = parametros[0];
-    img->largura = parametros[1];
+    img->altura = parametros[1];
+    img->largura = parametros[0];
+    //printf("Largura: %d\n", img->largura);
+    //printf("Altura: %d\n", img->altura);
     realocar_matriz(img);
 }
 
@@ -291,11 +297,12 @@ void interpretar(comando entrada, imagem *img) {
     }
 
 }
+
 /* Lê o arquivo de comandos, criando uma struct de comando que é passado 
 para a função que interpreta juntamente com uma instância da imagem*/
 void input(char nome_arquivo[]){
 
-    imagem img;// = alocar_matriz();
+    imagem img = alocar_matriz();
 
     strcpy(img.nome_imagem, "imagem.ppm");
 
@@ -341,7 +348,7 @@ void input(char nome_arquivo[]){
 
             if(strcmp(nome_comando, "open") == 0 || strcmp(nome_comando, "save") == 0 ){
 
-                 strcpy(instrucao.comando_string, entradas[1]);
+                strcpy(instrucao.comando_string, entradas[1]);
             }
 
             // separando os comandos
@@ -396,7 +403,7 @@ void input(char nome_arquivo[]){
         
         fclose(file);
 
-        desalocar_matriz(img);
+        desalocar_matriz(&img);
     }
 }
 

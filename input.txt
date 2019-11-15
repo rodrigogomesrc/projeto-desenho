@@ -1,4 +1,5 @@
-imagem 250 200
-clear 255 255 255
-line 0 0 150 150
-save test4.ppm
+open test5.ppm
+clear 0 0 0
+color 255 255 255
+line 0 100 150 100
+save test5.ppm
