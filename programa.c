@@ -54,6 +54,11 @@ void interpretar(comando *entrada, imagem *img) {
         circle(img, entrada->parametros);
     }
 
+    else if(strcmp(entrada->nome_comando, "fill") == 0){
+
+        fill(img, entrada->parametros);
+    }
+
 }
 
 /* Lê o arquivo de comandos, criando uma struct de comando que é passado 

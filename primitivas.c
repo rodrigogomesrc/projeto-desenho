@@ -160,7 +160,6 @@ void clear(imagem *img, int parametros[]){
 void rect(imagem *img, int parametros[]){
 
     comando cmd;
-
     cmd.qtd_parametros = 9;
 
     cmd.parametros[0] = 4;
@@ -184,13 +183,11 @@ void circle(imagem *img, int parametros[]){
     int raio = parametros[2];
     int x0 = parametros[0] + raio;
     int y0 = parametros[1] + raio;
-    
     int f = 1 - raio;
     int ddF_x = 0;
     int ddF_y = -2 * raio;
     int x = 0;
     int y = raio;
-
 
     for (int i = 0; i < 3; ++i)
     {
@@ -224,6 +221,66 @@ void circle(imagem *img, int parametros[]){
         }
 
     }
+
+}
+
+void rec_fill(imagem *img, int x, int y, int cor_inicial[]){
+
+    int pixel_valido = 1;
+
+    for (int i = 0; i < 3; ++i)
+    {
+        if(cor_inicial[i] != img->matriz[y][x][i]){
+
+            pixel_valido = 0;
+            break;
+        }
+    }
+
+    if(pixel_valido == 1){
+
+        for (int i = 0; i < 3; ++i)
+        {
+            img->matriz[y][x][i] = img->cor_atual[i];
+        }
+
+        if(x - 1 >= 0){
+
+            rec_fill(img, x - 1, y, cor_inicial);
+        }
+
+        if(x + 1 < img->largura){
+
+            rec_fill(img, x + 1, y, cor_inicial);
+        }
+
+        if(y - 1 >= 0){
+
+            rec_fill(img, x, y - 1, cor_inicial);
+        }
+    
+        if(y + 1 < img->altura){
+
+            rec_fill(img, x, y + 1, cor_inicial);
+        }
+
+    }
+
+}
+
+// preenche figuras
+void fill(imagem *img, int parametros[]){
+
+    int x = parametros[0];
+    int y = parametros[1];
+    int cor_inicial[3];
+
+    for (int i = 0; i < 3; ++i)
+    {
+        cor_inicial[i] = img->matriz[x][y][i];
+    }
+
+    rec_fill(img, x, y, cor_inicial);
 
 }
  
