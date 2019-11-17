@@ -1,4 +1,10 @@
-open fill2.ppm
-color 255 255 0
-fill 120 1
-save fill2.ppm
+open test_fill2.ppm
+color 0 0 50
+fill 0 0
+color 0 0 100
+fill 110 0
+color 0 0 180
+fill 0 110
+color 50 50 255
+fill 110 110
+save test_fill2.ppm

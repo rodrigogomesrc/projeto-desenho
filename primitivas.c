@@ -224,6 +224,7 @@ void circle(imagem *img, int parametros[]){
 
 }
 
+//Função recursiva para a execução do fill
 void rec_fill(imagem *img, int x, int y, int cor_inicial[]){
 
     int pixel_valido = 1;
@@ -238,6 +239,7 @@ void rec_fill(imagem *img, int x, int y, int cor_inicial[]){
     }
 
     if(pixel_valido == 1){
+
 
         for (int i = 0; i < 3; ++i)
         {
@@ -274,14 +276,27 @@ void fill(imagem *img, int parametros[]){
     int x = parametros[0];
     int y = parametros[1];
     int cor_inicial[3];
+    int pintado = 1;
 
     for (int i = 0; i < 3; ++i)
     {
-        cor_inicial[i] = img->matriz[x][y][i];
+        cor_inicial[i] = img->matriz[y][x][i];
     }
 
-    rec_fill(img, x, y, cor_inicial);
+    for (int i = 0; i < 3; ++i)
+    {
+       if(img->cor_atual[i] != img->matriz[y][x][i]){
 
+            pintado = 0;
+            break;
+        }
+    }
+
+    if(pintado == 0){
+
+        rec_fill(img, x, y, cor_inicial);  
+
+    } 
 }
  
 //Abre um arquivo de imagem ppm para edição
