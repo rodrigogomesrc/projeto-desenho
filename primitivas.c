@@ -181,8 +181,8 @@ void rect(imagem *img, int parametros[]){
 void circle(imagem *img, int parametros[]){
 
     int raio = parametros[2];
-    int x0 = parametros[0] + raio;
-    int y0 = parametros[1] + raio;
+    int x0 = parametros[0];
+    int y0 = parametros[1];
     int f = 1 - raio;
     int ddF_x = 0;
     int ddF_y = -2 * raio;
