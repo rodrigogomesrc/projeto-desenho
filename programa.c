@@ -7,7 +7,8 @@
 
 /*Recebe a imagem e os comandos vindo do arquivo, chamando a 
 função correspondente com a imagem a ser editada */
-void interpretar(comando *entrada, imagem *img) {
+void interpretar(comando *entrada, comando *ultima_entrada, imagem *img) {
+
 
     if(strcmp(entrada->nome_comando, "save") == 0){
 
@@ -59,6 +60,11 @@ void interpretar(comando *entrada, imagem *img) {
         fill(img, entrada->parametros);
     }
 
+    else if(strcmp(entrada->nome_comando, "repeat-line") == 0){
+
+        repeat_line(img, entrada->parametros, ultima_entrada);
+    }
+
 }
 
 /* Lê o arquivo de comandos, criando uma struct de comando que é passado 
@@ -66,6 +72,10 @@ para a função que interpreta juntamente com uma instância da imagem*/
 void executar(char nome_arquivo[]){
 
     imagem img = alocar_matriz();
+    comando instrucao;
+    comando ultima_instrucao;
+
+    strcpy(ultima_instrucao.nome_comando, "vazio");
 
     strcpy(img.nome_imagem, "imagem.ppm");
 
@@ -106,7 +116,6 @@ void executar(char nome_arquivo[]){
 
             strcpy(nome_comando, entradas[0]);
 
-            comando instrucao;
             strcpy(instrucao.nome_comando, nome_comando);
 
             if(strcmp(nome_comando, "open") == 0 || strcmp(nome_comando, "save") == 0 ){
@@ -146,7 +155,25 @@ void executar(char nome_arquivo[]){
                instrucao.parametros[i] = parametros[i];
             }
             
-            interpretar(&instrucao, &img);
+            interpretar(&instrucao, &ultima_instrucao, &img);
+
+
+            //preenche a struct com o comando atual após executá-lo, servindo como um histórico
+
+            strcpy(ultima_instrucao.nome_comando, nome_comando);
+
+            // limpa o vetor de instrução da struct
+            for (int i = 0; i < 30; ++i)
+            {
+               ultima_instrucao.parametros[i] = -1;
+            }
+
+            //copiar os parâmetros extraídos para o vetor de parâmetros
+            for (int i = 0; i < 10; ++i)
+            {
+               ultima_instrucao.parametros[i] = parametros[i];
+            }
+
 
             //limpa os vetores para guardar novos valores
             for (int i = 0; i < 30; ++i)

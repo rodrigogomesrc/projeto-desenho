@@ -1,10 +1,7 @@
-open test_fill2.ppm
-color 0 0 50
-fill 0 0
-color 0 0 100
-fill 110 0
-color 0 0 180
-fill 0 110
-color 50 50 255
-fill 110 110
-save test_fill2.ppm
+image 200 200
+clear 255 255 255
+color 0 0 0
+circle 30 30 20
+line 10 10 50 10 
+repeat-line 15 5 5
+save repeat.ppm

@@ -17,6 +17,8 @@ void clear(imagem *img, int parametros[]);
 
 void rect(imagem *img, int parametros[]);
 
+void repeat_line(imagem *img, int parametros[], comando *ultima_entrada);
+
 void open(imagem *img, char nome_arquivo[]);
 
 void image(imagem *img, int parametros[]);

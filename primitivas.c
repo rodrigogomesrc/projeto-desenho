@@ -84,6 +84,27 @@ void line(imagem *img, int parametros[]) {
     }
 }
 
+void repeat_line(imagem *img, int parametros[], comando *ultima_entrada){
+
+    if(strcmp(ultima_entrada->nome_comando, "line") == 0){
+
+        int quantidade = parametros[0];
+        int deltax = parametros[1];
+        int deltay = parametros[2];
+        int novos_parametros[4];
+
+        for (int i = 0; i < quantidade; ++i)
+        {
+            novos_parametros[0] = ultima_entrada->parametros[0] + deltax * (i + 1);
+            novos_parametros[1] = ultima_entrada->parametros[1] + deltay * (i + 1);
+            novos_parametros[2] = ultima_entrada->parametros[2] + deltax * (i + 1);
+            novos_parametros[3] = ultima_entrada->parametros[3] + deltay * (i + 1);
+            line(img, novos_parametros);
+        }
+        
+    }
+}
+
 //Função para criar uma reta na imagem
 void polygon(imagem *img, comando cmd){
 
@@ -340,8 +361,8 @@ void open(imagem *img, char nome_arquivo[]){
 
         realocar_matriz(img);
 
-        printf(">>>Altura: %d\n", img->altura);
-        printf(">>>Largura: %d\n", img->largura);
+        //printf(">>>Altura: %d\n", img->altura);
+        //printf(">>>Largura: %d\n", img->largura);
 
         qtd_cores = img->altura * img->largura * 3;
 
