@@ -65,6 +65,11 @@ void interpretar(comando *entrada, comando *ultima_entrada, imagem *img) {
         repeat_line(img, entrada->parametros, ultima_entrada);
     }
 
+    else if(strcmp(entrada->nome_comando, "copy-polygon") == 0){
+
+        copy_polygon(img, entrada->parametros, ultima_entrada);
+    }
+
 }
 
 /* Lê o arquivo de comandos, criando uma struct de comando que é passado 

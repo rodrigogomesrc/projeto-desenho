@@ -4,4 +4,6 @@ color 0 0 0
 circle 30 30 20
 line 10 10 50 10 
 repeat-line 15 5 5
+polygon 3 50 50 50 70 70 70
+copy-polygon 100 100 
 save repeat.ppm

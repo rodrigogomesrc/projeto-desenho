@@ -112,6 +112,13 @@ void polygon(imagem *img, comando cmd){
     int ordenadas = cmd.qtd_parametros -1;
     int parametros[4];
 
+    //printf("%d\n", cmd.qtd_parametros);
+    puts("-----------");
+    for (int i = 0; i < cmd.qtd_parametros; ++i)
+    {
+        printf("%d\n", cmd.parametros[i]);
+    }
+
     int retas[ordenadas][4];
     int indice_retas = 0;
 
@@ -150,6 +157,37 @@ void polygon(imagem *img, comando cmd){
 
         line(img, parametros);
     }
+}
+
+void copy_polygon(imagem *img, int parametros[], comando *ultima_entrada){
+
+    int distanciax = parametros[0] - ultima_entrada->parametros[1];
+    int distanciay = parametros[1] - ultima_entrada->parametros[2];
+
+    int pontos = ultima_entrada->parametros[0];
+
+    int qtd_parametros = pontos * 2 + 1;
+
+    int novos_parametros[qtd_parametros];
+    novos_parametros[0] = ultima_entrada->parametros[0];
+
+    comando cmd;
+    cmd.qtd_parametros = qtd_parametros;
+
+    for (int i = 0; i < pontos; i += 2)
+    {
+        novos_parametros[i + 1] = ultima_entrada->parametros[i + 1] + distanciax;
+        novos_parametros[i + 2] = ultima_entrada->parametros[i + 2] + distanciay;
+    }
+
+    for (int i = 0; i < qtd_parametros; ++i)
+    {
+        //printf("%d\n", novos_parametros[i]);
+        cmd.parametros[i] = novos_parametros[i];
+    }
+
+    polygon(img, cmd);
+
 }
 
 //Define a cor atual
