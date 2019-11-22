@@ -163,15 +163,17 @@ void repeat_polygon(imagem *img, int parametros[], comando *ultima_entrada){
         int deltay = parametros[2];
         int ordenadas = ultima_entrada->parametros[0] * 2;
 
+        comando novo_poligono = *ultima_entrada;
+
         for (int i = 0; i < quantidade; ++i)
         {
             for (int j = 1; j < ordenadas + 1; j+=2)
             {
-                ultima_entrada->parametros[j] += deltax;
-                ultima_entrada->parametros[j + 1] += deltay;
+                novo_poligono.parametros[j] += deltax;
+                novo_poligono.parametros[j + 1] += deltay;
             }
 
-            polygon(img, *ultima_entrada);
+            polygon(img, novo_poligono);
         }
     }
 }

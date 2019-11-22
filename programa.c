@@ -170,22 +170,25 @@ void executar(char nome_arquivo[]){
 
             //preenche a struct com o comando atual após executá-lo, servindo como um histórico
 
-            strcpy(ultima_instrucao.nome_comando, nome_comando);
+            if(strcmp(nome_comando, "line") == 0 || strcmp(nome_comando, "polygon") == 0){
 
-            ultima_instrucao.qtd_parametros = qtd_parametros;
+                strcpy(ultima_instrucao.nome_comando, nome_comando);
 
-            // limpa o vetor de instrução da struct
-            for (int i = 0; i < 30; ++i)
-            {
-               ultima_instrucao.parametros[i] = -1;
+                ultima_instrucao.qtd_parametros = qtd_parametros;
+
+                // limpa o vetor de instrução da struct
+                for (int i = 0; i < 30; ++i)
+                {
+                   ultima_instrucao.parametros[i] = -1;
+                }
+
+                //copiar os parâmetros extraídos para o vetor de parâmetros
+                for (int i = 0; i < 10; ++i)
+                {
+                   ultima_instrucao.parametros[i] = parametros[i];
+                }
+
             }
-
-            //copiar os parâmetros extraídos para o vetor de parâmetros
-            for (int i = 0; i < 10; ++i)
-            {
-               ultima_instrucao.parametros[i] = parametros[i];
-            }
-
 
             //limpa os vetores para guardar novos valores
             for (int i = 0; i < 30; ++i)
