@@ -19,7 +19,6 @@ void save(imagem *img, char nome_arquivo[]){
             {   
                 fprintf(file, "%d ", img->matriz[i][j][z]);
             }
-            
         }
     }
 
@@ -63,20 +62,21 @@ void line(imagem *img, int parametros[]) {
 
         for (int i = 0; i < 3; ++i)
         {
-
            img->matriz[y0][x0][i] = img->cor_atual[i];
-
         }
 
         if (x0==x1 && y0==y1){
             break;
         }
+
         e2 = 2*err;
+
         if (e2 >= dy){
 
             err += dy;
             x0 += sx;
         }
+
         if (e2 <= dx){
             err += dx;
             y0 += sy;
@@ -97,7 +97,6 @@ void repeat_line(imagem *img, int parametros[], comando *ultima_entrada){
 
         for (int i = 0; i < quantidade; ++i)
         {   
-
             novos_parametros[0] = ultima_entrada->parametros[0] + deltax0 * (i + 1);
             novos_parametros[1] = ultima_entrada->parametros[1] + deltay0 * (i + 1);
             novos_parametros[2] = ultima_entrada->parametros[2] + deltax1 * (i + 1);
@@ -154,6 +153,7 @@ void polygon(imagem *img, comando cmd){
     }
 }
 
+//Repete um polígono definido na linha anterior n vezes com incrementos na posição x e y
 void repeat_polygon(imagem *img, int parametros[], comando *ultima_entrada){
 
     if(strcmp(ultima_entrada->nome_comando, "polygon") == 0){
@@ -176,34 +176,21 @@ void repeat_polygon(imagem *img, int parametros[], comando *ultima_entrada){
     }
 }
 
+//Copia o polígono definido na linha anterior para uma nova coordenada
 void copy_polygon(imagem *img, int parametros[], comando *ultima_entrada){
 
     int distanciax = parametros[0] - ultima_entrada->parametros[1];
     int distanciay = parametros[1] - ultima_entrada->parametros[2];
-
     int pontos = ultima_entrada->parametros[0];
-
-    int qtd_parametros = pontos * 2 + 1;
-
-    int novos_parametros[qtd_parametros];
-    novos_parametros[0] = ultima_entrada->parametros[0];
-
-    comando cmd;
-    cmd.qtd_parametros = qtd_parametros;
+    int qtd_parametros = ultima_entrada->qtd_parametros;
 
     for (int i = 0; i < pontos * 2; i += 2)
     {
-        novos_parametros[i + 1] = ultima_entrada->parametros[i + 1] + distanciax;
-        novos_parametros[i + 2] = ultima_entrada->parametros[i + 2] + distanciay;
+        ultima_entrada->parametros[i + 1] += distanciax;
+        ultima_entrada->parametros[i + 2] += distanciay;
     }
 
-    for (int i = 0; i < qtd_parametros; ++i)
-    {
-        cmd.parametros[i] = novos_parametros[i];
-    }
-
-    polygon(img, cmd);
-
+    polygon(img, *ultima_entrada);
 }
 
 //Define a cor atual
@@ -222,13 +209,11 @@ void clear(imagem *img, int parametros[]){
     {
         for (int j = 0; j < img->largura; ++j)
         {   
-
             img->matriz[i][j][0] = parametros[0];
             img->matriz[i][j][1] = parametros[1];
             img->matriz[i][j][2] = parametros[2];
         }
     }
-
 }
 
 //Cria retângulos
@@ -248,7 +233,6 @@ void rect(imagem *img, int parametros[]){
     cmd.parametros[8] = parametros[1] + parametros[3];
 
     polygon(img, cmd);
-
 }
 
 //Cria círculos
@@ -275,10 +259,12 @@ void circle(imagem *img, int parametros[]){
     while(x < y){
 
         if(f >= 0){
+
             y--;
             ddF_y += 2;
             f += ddF_y;
         }
+
         x++;
         ddF_x += 2;
         f += ddF_x + 1;
@@ -294,9 +280,7 @@ void circle(imagem *img, int parametros[]){
             img->matriz[x0 + y][y0 - x][i] = img->cor_atual[i];
             img->matriz[x0 - y][y0 - x][i] = img->cor_atual[i];
         }
-
     }
-
 }
 
 //Função recursiva para a execução do fill
@@ -314,7 +298,6 @@ void rec_fill(imagem *img, int x, int y, int cor_inicial[]){
     }
 
     if(pixel_valido == 1){
-
 
         for (int i = 0; i < 3; ++i)
         {
@@ -340,9 +323,7 @@ void rec_fill(imagem *img, int x, int y, int cor_inicial[]){
 
             rec_fill(img, x, y + 1, cor_inicial);
         }
-
     }
-
 }
 
 // preenche figuras
@@ -370,7 +351,6 @@ void fill(imagem *img, int parametros[]){
     if(pintado == 0){
 
         rec_fill(img, x, y, cor_inicial);  
-
     } 
 }
  
@@ -441,7 +421,6 @@ void open(imagem *img, char nome_arquivo[]){
             }
         }
     }
-
 }
 
 //Define a resolução da imagem
