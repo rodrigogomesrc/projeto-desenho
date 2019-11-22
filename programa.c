@@ -70,6 +70,11 @@ void interpretar(comando *entrada, comando *ultima_entrada, imagem *img) {
         copy_polygon(img, entrada->parametros, ultima_entrada);
     }
 
+    else if(strcmp(entrada->nome_comando, "repeat-polygon") == 0){
+
+        repeat_polygon(img, entrada->parametros, ultima_entrada);
+    }
+
 }
 
 /* Lê o arquivo de comandos, criando uma struct de comando que é passado 
@@ -166,6 +171,8 @@ void executar(char nome_arquivo[]){
             //preenche a struct com o comando atual após executá-lo, servindo como um histórico
 
             strcpy(ultima_instrucao.nome_comando, nome_comando);
+
+            ultima_instrucao.qtd_parametros = qtd_parametros;
 
             // limpa o vetor de instrução da struct
             for (int i = 0; i < 30; ++i)

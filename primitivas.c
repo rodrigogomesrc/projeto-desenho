@@ -154,6 +154,28 @@ void polygon(imagem *img, comando cmd){
     }
 }
 
+void repeat_polygon(imagem *img, int parametros[], comando *ultima_entrada){
+
+    if(strcmp(ultima_entrada->nome_comando, "polygon") == 0){
+
+        int quantidade = parametros[0];
+        int deltax = parametros[1];
+        int deltay = parametros[2];
+        int ordenadas = ultima_entrada->parametros[0] * 2;
+
+        for (int i = 0; i < quantidade; ++i)
+        {
+            for (int j = 1; j < ordenadas + 1; j+=2)
+            {
+                ultima_entrada->parametros[j] += deltax;
+                ultima_entrada->parametros[j + 1] += deltay;
+            }
+
+            polygon(img, *ultima_entrada);
+        }
+    }
+}
+
 void copy_polygon(imagem *img, int parametros[], comando *ultima_entrada){
 
     int distanciax = parametros[0] - ultima_entrada->parametros[1];

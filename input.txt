@@ -5,10 +5,13 @@ circle 30 30 20
 line 10 10 50 10 
 repeat-line 15 5 5 5 5
 polygon 3 50 50 50 70 70 70
-copy-polygon 100 100
+copy-polygon 150 150
 color 255 0 0
-polygon 4 50 50 50 70 70 70 70 90
+polygon 4 50 80 50 100 70 120 70 100
 copy-polygon 10 50
 line 100 100 150 100
 repeat-line 7 0 -5 5 5
+color 0 0 255
+polygon 3 100 120 100 140 140 140 
+repeat-polygon 4 -7 5
 save repeat.ppm
