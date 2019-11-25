@@ -1,0 +1,281 @@
+\hypertarget{funcoes_8h}{}\doxysection{funcoes.\+h File Reference}
+\label{funcoes_8h}\index{funcoes.h@{funcoes.h}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{funcoes_8h_a3be5d4e7cf4ed2ea5487162905572ec3}{split}} (char string\+\_\+entrada\mbox{[}$\,$\mbox{]}, char delim\mbox{[}$\,$\mbox{]}, char retorno\mbox{[}$\,$\mbox{]}\mbox{[}50\mbox{]})
+\begin{DoxyCompactList}\small\item\em Reparte uma string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{funcoes_8h_a890ea9946119feb3fb8275a4770989c3}{limpar\+\_\+string\+\_\+arquivo}} (char entrada\mbox{[}$\,$\mbox{]}, char saida\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Limpa strings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{funcoes_8h_ad5f05b3083aad3506e27242deb852c8a}{retira\+\_\+barraN}} (char entrada\mbox{[}$\,$\mbox{]}, char saida\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Retira a quebra de linha de uma string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structimagem__t}{imagem}} \mbox{\hyperlink{funcoes_8h_a2a715cf63176e19d14ff9a3ac02949bc}{alocar\+\_\+matriz}} ()
+\begin{DoxyCompactList}\small\item\em Aloca a matriz da imagem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{funcoes_8h_a6782726af7f91d3618f53dcb39e038f4}{realocar\+\_\+matriz}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img)
+\begin{DoxyCompactList}\small\item\em Realoca a matriz de pixels com o tamanho necessário. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{funcoes_8h_af99db9b8d77c2b1c1fe023e191ced11d}{desalocar\+\_\+matriz}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img)
+\begin{DoxyCompactList}\small\item\em Desaloca a matriz de pixels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{funcoes_8h_a2a715cf63176e19d14ff9a3ac02949bc}\label{funcoes_8h_a2a715cf63176e19d14ff9a3ac02949bc}} 
+\index{funcoes.h@{funcoes.h}!alocar\_matriz@{alocar\_matriz}}
+\index{alocar\_matriz@{alocar\_matriz}!funcoes.h@{funcoes.h}}
+\doxysubsubsection{\texorpdfstring{alocar\_matriz()}{alocar\_matriz()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimagem__t}{imagem}} alocar\+\_\+matriz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Aloca a matriz da imagem. 
+
+Faz a alocação inicial do vetor tridimensional que guarda os pixels referentes a imagem que está sendo editada. \begin{DoxyReturn}{Returns}
+Uma instancia da struct imagem com a matriz tridimensional alocada. 
+\end{DoxyReturn}
+
+
+Definition at line 118 of file funcoes.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{118                       \{}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \mbox{\hyperlink{structimagem__t}{imagem}} img;}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     img.\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}} = malloc(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}**) * 1);}
+\DoxyCodeLine{123     img.\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[0] = malloc(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}*) * 1);}
+\DoxyCodeLine{124     img.\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[0][0] = malloc(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}) * 3); }
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{keywordflow}{return} img;}
+\DoxyCodeLine{127 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{funcoes_8h_af99db9b8d77c2b1c1fe023e191ced11d}\label{funcoes_8h_af99db9b8d77c2b1c1fe023e191ced11d}} 
+\index{funcoes.h@{funcoes.h}!desalocar\_matriz@{desalocar\_matriz}}
+\index{desalocar\_matriz@{desalocar\_matriz}!funcoes.h@{funcoes.h}}
+\doxysubsubsection{\texorpdfstring{desalocar\_matriz()}{desalocar\_matriz()}}
+{\footnotesize\ttfamily void desalocar\+\_\+matriz (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img }\end{DoxyParamCaption})}
+
+
+
+Desaloca a matriz de pixels. 
+
+Usa a informação recebida da struct imagem, para pegar a resolução da imagem a ser editada para desalocar todos os bytes que foram alocados na matriz de acordo com essa resolução.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a ser desalocada. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 98 of file funcoes.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{98                                   \{}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     \textcolor{comment}{//puts("desalocando a matriz");}}
+\DoxyCodeLine{101     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}}; ++i)}
+\DoxyCodeLine{102     \{}
+\DoxyCodeLine{103         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}}; ++j)}
+\DoxyCodeLine{104         \{}
+\DoxyCodeLine{105             free(img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i][j]);}
+\DoxyCodeLine{106                   }
+\DoxyCodeLine{107         \}}
+\DoxyCodeLine{108     \}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}}; ++i)}
+\DoxyCodeLine{111     \{}
+\DoxyCodeLine{112         free(img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i]);}
+\DoxyCodeLine{113     \}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     free(img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}});}
+\DoxyCodeLine{116 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{funcoes_8h_a890ea9946119feb3fb8275a4770989c3}\label{funcoes_8h_a890ea9946119feb3fb8275a4770989c3}} 
+\index{funcoes.h@{funcoes.h}!limpar\_string\_arquivo@{limpar\_string\_arquivo}}
+\index{limpar\_string\_arquivo@{limpar\_string\_arquivo}!funcoes.h@{funcoes.h}}
+\doxysubsubsection{\texorpdfstring{limpar\_string\_arquivo()}{limpar\_string\_arquivo()}}
+{\footnotesize\ttfamily void limpar\+\_\+string\+\_\+arquivo (\begin{DoxyParamCaption}\item[{char}]{entrada\mbox{[}$\,$\mbox{]},  }\item[{char}]{saida\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Limpa strings. 
+
+Retira caracteres especiais e outras \char`\"{}sujeiras\char`\"{} que possam estar na string remanescentes daquela posição da memória 
+\begin{DoxyParams}{Parameters}
+{\em entrada} & recebe a string a ser limpa \\
+\hline
+{\em saida} & recebe uma string para depositar a string após ser limpa \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 79 of file funcoes.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{79                                                         \{}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \textcolor{keywordtype}{int} i = 0;}
+\DoxyCodeLine{82     \textcolor{keywordflow}{while}(1)\{}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \textcolor{keywordflow}{if}(isalpha(entrada[i]) || entrada[i] == \textcolor{charliteral}{'.'} || entrada[i] == \textcolor{charliteral}{'\_'} || numero(entrada[i]))\{}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86             saida[i] = entrada[i];}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entrada[i] == \textcolor{charliteral}{'\(\backslash\)0'})\{}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93         i++;}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{funcoes_8h_a6782726af7f91d3618f53dcb39e038f4}\label{funcoes_8h_a6782726af7f91d3618f53dcb39e038f4}} 
+\index{funcoes.h@{funcoes.h}!realocar\_matriz@{realocar\_matriz}}
+\index{realocar\_matriz@{realocar\_matriz}!funcoes.h@{funcoes.h}}
+\doxysubsubsection{\texorpdfstring{realocar\_matriz()}{realocar\_matriz()}}
+{\footnotesize\ttfamily void realocar\+\_\+matriz (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img }\end{DoxyParamCaption})}
+
+
+
+Realoca a matriz de pixels com o tamanho necessário. 
+
+Usa a informação recebida da struct imagem, para pegar a resolução da imagem a ser editada para realocar a matriz com a quantidade de bytes de bytes necessária para armazenar todos os pixels da imagem com tal resolução.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a ser realocada. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 130 of file funcoes.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{130                                  \{}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132     \textcolor{comment}{//printf("Alt: \%d\(\backslash\)n", img-\/>altura);}}
+\DoxyCodeLine{133     \textcolor{comment}{//printf("Larg: \%d\(\backslash\)n", img-\/>largura);}}
+\DoxyCodeLine{134     \textcolor{comment}{//puts("realocando...");}}
+\DoxyCodeLine{135     img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}} = realloc(img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}**) * img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}});}
+\DoxyCodeLine{136   }
+\DoxyCodeLine{137     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}}; ++i)}
+\DoxyCodeLine{138     \{}
+\DoxyCodeLine{139         img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i] = realloc(img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}*) * img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}});}
+\DoxyCodeLine{140     \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}}; ++i)}
+\DoxyCodeLine{143     \{}
+\DoxyCodeLine{144         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}}; ++j)}
+\DoxyCodeLine{145         \{}
+\DoxyCodeLine{146             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i][j] = realloc(img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i][j], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}) * 3); }
+\DoxyCodeLine{147         \}}
+\DoxyCodeLine{148     \}}
+\DoxyCodeLine{149     \textcolor{comment}{//puts("realocou");}}
+\DoxyCodeLine{150 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{funcoes_8h_ad5f05b3083aad3506e27242deb852c8a}\label{funcoes_8h_ad5f05b3083aad3506e27242deb852c8a}} 
+\index{funcoes.h@{funcoes.h}!retira\_barraN@{retira\_barraN}}
+\index{retira\_barraN@{retira\_barraN}!funcoes.h@{funcoes.h}}
+\doxysubsubsection{\texorpdfstring{retira\_barraN()}{retira\_barraN()}}
+{\footnotesize\ttfamily void retira\+\_\+barraN (\begin{DoxyParamCaption}\item[{char}]{entrada\mbox{[}$\,$\mbox{]},  }\item[{char}]{saida\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Retira a quebra de linha de uma string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entrada} & recebe a string para ser retirada a quebra de linha. \\
+\hline
+{\em saida} & recebe a string para ser colocada a string limpa. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{funcoes_8h_a3be5d4e7cf4ed2ea5487162905572ec3}\label{funcoes_8h_a3be5d4e7cf4ed2ea5487162905572ec3}} 
+\index{funcoes.h@{funcoes.h}!split@{split}}
+\index{split@{split}!funcoes.h@{funcoes.h}}
+\doxysubsubsection{\texorpdfstring{split()}{split()}}
+{\footnotesize\ttfamily void split (\begin{DoxyParamCaption}\item[{char}]{string\+\_\+entrada\mbox{[}$\,$\mbox{]},  }\item[{char}]{delim\mbox{[}$\,$\mbox{]},  }\item[{char}]{retorno\mbox{[}$\,$\mbox{]}\mbox{[}50\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Reparte uma string. 
+
+Recebe uma string e quebra ela em um vetor de strings de acordo com uma string usada como separadora. 
+\begin{DoxyParams}{Parameters}
+{\em string\+\_\+entrada} & recebe a string a ser repartida. \\
+\hline
+{\em delim} & recebe a string utilizada para quebrar a string em substrings. \\
+\hline
+{\em retorno} & recebe um vetor de string que é usado para colocar a substrings geradas \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 8 of file funcoes.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{8                                                                    \{}
+\DoxyCodeLine{9  }
+\DoxyCodeLine{10     \textcolor{keywordtype}{int} tam\_delimitador = 0;}
+\DoxyCodeLine{11     \textcolor{keywordtype}{int} indice\_str\_atual = 0; }
+\DoxyCodeLine{12     \textcolor{keywordtype}{int} indice\_retorno = 0; }
+\DoxyCodeLine{13  }
+\DoxyCodeLine{14     \textcolor{keywordflow}{while}(delim[tam\_delimitador] != \textcolor{charliteral}{'\(\backslash\)0'})\{}
+\DoxyCodeLine{15         tam\_delimitador++;}
+\DoxyCodeLine{16     \}}
+\DoxyCodeLine{17  }
+\DoxyCodeLine{18     \textcolor{keywordtype}{int} i = 0;}
+\DoxyCodeLine{19     \textcolor{keywordflow}{while}(string\_entrada[i] != \textcolor{charliteral}{'\(\backslash\)0'})\{}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21         \textcolor{keywordflow}{if}(string\_entrada[i] == delim[0])\{}
+\DoxyCodeLine{22  }
+\DoxyCodeLine{23             \textcolor{keywordtype}{int} corresponde = 1;}
+\DoxyCodeLine{24             \textcolor{keywordtype}{int} loops = 0;}
+\DoxyCodeLine{25             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 1; j < tam\_delimitador; ++j)}
+\DoxyCodeLine{26             \{}
+\DoxyCodeLine{27                 loops++;}
+\DoxyCodeLine{28  }
+\DoxyCodeLine{29                 \textcolor{keywordflow}{if}(string\_entrada[i + j] != delim[j] )\{}
+\DoxyCodeLine{30  }
+\DoxyCodeLine{31                     corresponde = 0;}
+\DoxyCodeLine{32                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{33                 \}}
+\DoxyCodeLine{34             \}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36             \textcolor{keywordflow}{if}(corresponde == 1)\{}
+\DoxyCodeLine{37  }
+\DoxyCodeLine{38                 retorno[indice\_retorno][indice\_str\_atual] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{39                 i += tam\_delimitador -\/1; }
+\DoxyCodeLine{40                 indice\_retorno++; }
+\DoxyCodeLine{41                 indice\_str\_atual = 0; }
+\DoxyCodeLine{42  }
+\DoxyCodeLine{43             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{44  }
+\DoxyCodeLine{45                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} l = i; l <= i + loops; ++l)}
+\DoxyCodeLine{46                 \{}
+\DoxyCodeLine{47                     retorno[indice\_retorno][indice\_str\_atual] = string\_entrada[l];}
+\DoxyCodeLine{48                     indice\_str\_atual++;}
+\DoxyCodeLine{49                 \}}
+\DoxyCodeLine{50                 i += loops;}
+\DoxyCodeLine{51             \}}
+\DoxyCodeLine{52  }
+\DoxyCodeLine{53         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{54  }
+\DoxyCodeLine{55             retorno[indice\_retorno][indice\_str\_atual] = string\_entrada[i];}
+\DoxyCodeLine{56             indice\_str\_atual++;}
+\DoxyCodeLine{57         \}}
+\DoxyCodeLine{58         i++;}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60     retorno[indice\_retorno][indice\_str\_atual] = \textcolor{charliteral}{'\(\backslash\)0'}; }
+\DoxyCodeLine{61 \}}
+
+\end{DoxyCode}

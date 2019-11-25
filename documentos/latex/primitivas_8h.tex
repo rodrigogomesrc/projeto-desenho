@@ -1,0 +1,761 @@
+\hypertarget{primitivas_8h}{}\doxysection{primitivas.\+h File Reference}
+\label{primitivas_8h}\index{primitivas.h@{primitivas.h}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{primitivas_8h_ae3082392647c4be3e9dc0a765bb74e79}{save}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, char nome\+\_\+arquivo\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Salva a Imagem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_a9f8c8efefc4b65afa3576855bfd9e8a6}{line}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Cria uma linha. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_ade047fb3bf8dcd0651791eba51c41f58}{polygon}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, \mbox{\hyperlink{structcomando__t}{comando}} cmd)
+\begin{DoxyCompactList}\small\item\em Cria um polígono. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_ab68553298da7d55df67856c298325c89}{circle}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Cria um círculo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_a3bb9edb0db9e5e3c9b0030833061a3a7}{fill}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Preenche superfícies. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_ad807b1503b5045823fb792c6070e3930}{color}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Define uma cor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_ac705865a8c051976536be7c3ef7e2b18}{clear}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Limpa uma imagem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_abf90c2e6c94f2d6ebde22203b948a901}{rect}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Cria um retângulo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_ad4ac5775e35014f52d854fdd4576ddcc}{repeat\+\_\+line}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcomando__t}{comando}} $\ast$ultima\+\_\+entrada)
+\begin{DoxyCompactList}\small\item\em Repete uma linha. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_a6f8ec4f3dcdc816c8bebcf0df9313c4b}{repeat\+\_\+polygon}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcomando__t}{comando}} $\ast$ultima\+\_\+entrada)
+\begin{DoxyCompactList}\small\item\em Repete um polígono. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_ae280dc1a82043b702ee6c778c14b729a}{copy\+\_\+polygon}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcomando__t}{comando}} $\ast$ultima\+\_\+entrada)
+\begin{DoxyCompactList}\small\item\em Copia um polígono. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_a5f798ac6399e376cd06666ffcc546ebe}{open}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, char nome\+\_\+arquivo\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Abre uma imagem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{primitivas_8h_a454b231d33ed3752f318dcd13d7c8b7f}{image}} (\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img, int parametros\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Define a resolução da imagem a ser criada. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{primitivas_8h_ab68553298da7d55df67856c298325c89}\label{primitivas_8h_ab68553298da7d55df67856c298325c89}} 
+\index{primitivas.h@{primitivas.h}!circle@{circle}}
+\index{circle@{circle}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{circle()}{circle()}}
+{\footnotesize\ttfamily void circle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Cria um círculo. 
+
+A função cria um círculo recebendo as coordenadas do ponto central e o raio.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em cmd} & recebe uma struct comando, de onde é retirado os parâmetros necessários para a execução da matriz. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 242 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{242                                           \{}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244     \textcolor{keywordtype}{int} raio = parametros[2];}
+\DoxyCodeLine{245     \textcolor{keywordtype}{int} x0 = parametros[0];}
+\DoxyCodeLine{246     \textcolor{keywordtype}{int} y0 = parametros[1];}
+\DoxyCodeLine{247     \textcolor{keywordtype}{int} f = 1 -\/ raio;}
+\DoxyCodeLine{248     \textcolor{keywordtype}{int} ddF\_x = 0;}
+\DoxyCodeLine{249     \textcolor{keywordtype}{int} ddF\_y = -\/2 * raio;}
+\DoxyCodeLine{250     \textcolor{keywordtype}{int} x = 0;}
+\DoxyCodeLine{251     \textcolor{keywordtype}{int} y = raio;}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++i)}
+\DoxyCodeLine{254     \{}
+\DoxyCodeLine{255         img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0][y0 + raio][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{256         img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0][y0 -\/ raio][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{257         img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 + raio][y0][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{258         img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 -\/ raio][y0][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{259     \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     \textcolor{keywordflow}{while}(x < y)\{}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263         \textcolor{keywordflow}{if}(f >= 0)\{}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265             y-\/-\/;}
+\DoxyCodeLine{266             ddF\_y += 2;}
+\DoxyCodeLine{267             f += ddF\_y;}
+\DoxyCodeLine{268         \}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270         x++;}
+\DoxyCodeLine{271         ddF\_x += 2;}
+\DoxyCodeLine{272         f += ddF\_x + 1;}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++i)}
+\DoxyCodeLine{275         \{}
+\DoxyCodeLine{276             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 + x][y0 + y][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{277             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 -\/ x][y0 + y][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{278             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 + x][y0 -\/ y][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{279             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 -\/ x][y0 -\/ y][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{280             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 + y][y0 + x][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{281             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 -\/ y][y0 + x][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{282             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 + y][y0 -\/ x][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{283             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[x0 -\/ y][y0 -\/ x][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{284         \}}
+\DoxyCodeLine{285     \}}
+\DoxyCodeLine{286 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_ac705865a8c051976536be7c3ef7e2b18}\label{primitivas_8h_ac705865a8c051976536be7c3ef7e2b18}} 
+\index{primitivas.h@{primitivas.h}!clear@{clear}}
+\index{clear@{clear}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void clear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Limpa uma imagem. 
+
+A função recebe uma cor para preencher todos os pixels da imagem.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor contendo os três valores (rgb) para definir a cor a ser usada no preenchimento. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 208 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{208                                          \{}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}}; i++)}
+\DoxyCodeLine{211     \{}
+\DoxyCodeLine{212         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}}; ++j)}
+\DoxyCodeLine{213         \{   }
+\DoxyCodeLine{214             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i][j][0] = parametros[0];}
+\DoxyCodeLine{215             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i][j][1] = parametros[1];}
+\DoxyCodeLine{216             img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i][j][2] = parametros[2];}
+\DoxyCodeLine{217         \}}
+\DoxyCodeLine{218     \}}
+\DoxyCodeLine{219 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_ad807b1503b5045823fb792c6070e3930}\label{primitivas_8h_ad807b1503b5045823fb792c6070e3930}} 
+\index{primitivas.h@{primitivas.h}!color@{color}}
+\index{color@{color}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{color()}{color()}}
+{\footnotesize\ttfamily void color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Define uma cor. 
+
+A função define uma cor (rgb) a ser usada para as primitivas que se seguem a essa instrução.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor contendo os três valores (rgb) para definir a cor. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 199 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{199                                          \{}
+\DoxyCodeLine{200     }
+\DoxyCodeLine{201     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++i)}
+\DoxyCodeLine{202     \{}
+\DoxyCodeLine{203         img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i] = parametros[i];}
+\DoxyCodeLine{204     \}}
+\DoxyCodeLine{205 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_ae280dc1a82043b702ee6c778c14b729a}\label{primitivas_8h_ae280dc1a82043b702ee6c778c14b729a}} 
+\index{primitivas.h@{primitivas.h}!copy\_polygon@{copy\_polygon}}
+\index{copy\_polygon@{copy\_polygon}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{copy\_polygon()}{copy\_polygon()}}
+{\footnotesize\ttfamily void copy\+\_\+polygon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcomando__t}{comando}} $\ast$}]{ultima\+\_\+entrada }\end{DoxyParamCaption})}
+
+
+
+Copia um polígono. 
+
+Define uma nova coordenada e um novo polígono é copiado para essa nova posição, tomando como referência seu primeiro ponto.
+
+O polígono a ser copiado é o último definido.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor contendo a quantidade de repetições e os incrementos. \\
+\hline
+{\em ultima\+\_\+entrada} & recebe um ponteiro referente a uma struct comando que contem a última instrução que contem o polígono a ser repetido. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 182 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{182                                                                          \{}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     \textcolor{keywordtype}{int} distanciax = parametros[0] -\/ ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[1];}
+\DoxyCodeLine{185     \textcolor{keywordtype}{int} distanciay = parametros[1] -\/ ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[2];}
+\DoxyCodeLine{186     \textcolor{keywordtype}{int} pontos = ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[0];}
+\DoxyCodeLine{187     \textcolor{keywordtype}{int} qtd\_parametros = ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a35396e4f16b51882d49d48b2c75d3e60}{qtd\_parametros}};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < pontos * 2; i += 2)}
+\DoxyCodeLine{190     \{}
+\DoxyCodeLine{191         ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i + 1] += distanciax;}
+\DoxyCodeLine{192         ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i + 2] += distanciay;}
+\DoxyCodeLine{193     \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \mbox{\hyperlink{primitivas_8h_ade047fb3bf8dcd0651791eba51c41f58}{polygon}}(img, *ultima\_entrada);}
+\DoxyCodeLine{196 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_a3bb9edb0db9e5e3c9b0030833061a3a7}\label{primitivas_8h_a3bb9edb0db9e5e3c9b0030833061a3a7}} 
+\index{primitivas.h@{primitivas.h}!fill@{fill}}
+\index{fill@{fill}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily void fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Preenche superfícies. 
+
+A função preenche figuras ou qualquer superfície da imagem com a cor atual, até encontrar uma borda.
+
+Para isso a função recebe as coodernadas do ponto onde será pintado.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor, sendo as primeiras posições a coordenadas do ponto central, seguido do raio. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 332 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{332                                         \{}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334     \textcolor{keywordtype}{int} x = parametros[0];}
+\DoxyCodeLine{335     \textcolor{keywordtype}{int} y = parametros[1];}
+\DoxyCodeLine{336     \textcolor{keywordtype}{int} cor\_inicial[3];}
+\DoxyCodeLine{337     \textcolor{keywordtype}{int} pintado = 1;}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{339     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++i)}
+\DoxyCodeLine{340     \{}
+\DoxyCodeLine{341         cor\_inicial[i] = img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[y][x][i];}
+\DoxyCodeLine{342     \}}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++i)}
+\DoxyCodeLine{345     \{}
+\DoxyCodeLine{346        \textcolor{keywordflow}{if}(img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i] != img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[y][x][i])\{}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348             pintado = 0;}
+\DoxyCodeLine{349             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{350         \}}
+\DoxyCodeLine{351     \}}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353     \textcolor{keywordflow}{if}(pintado == 0)\{}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355         rec\_fill(img, x, y, cor\_inicial);  }
+\DoxyCodeLine{356     \} }
+\DoxyCodeLine{357 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_a454b231d33ed3752f318dcd13d7c8b7f}\label{primitivas_8h_a454b231d33ed3752f318dcd13d7c8b7f}} 
+\index{primitivas.h@{primitivas.h}!image@{image}}
+\index{image@{image}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{image()}{image()}}
+{\footnotesize\ttfamily void image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Define a resolução da imagem a ser criada. 
+
+A função cria uma imagem a se definir a resolução.
+
+A função recebe no vetor de parâmetro os dois valores referentes a quantidade de pixels no eixo x e y, chamando a função de alocação em seguida, reservando a memória necessária para a imagem.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem e salva a resolução nela, além de passá-\/la para fazer a alocação. \\
+\hline
+{\em parametros} & recebe um vetor com os valores referentes a resolução da imagem a ser criada. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 429 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{429                                           \{}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431     img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}} = parametros[1];}
+\DoxyCodeLine{432     img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}} = parametros[0];}
+\DoxyCodeLine{433     \textcolor{comment}{//printf("Largura: \%d\(\backslash\)n", img-\/>largura);}}
+\DoxyCodeLine{434     \textcolor{comment}{//printf("Altura: \%d\(\backslash\)n", img-\/>altura);}}
+\DoxyCodeLine{435     \mbox{\hyperlink{funcoes_8h_a6782726af7f91d3618f53dcb39e038f4}{realocar\_matriz}}(img);}
+\DoxyCodeLine{436 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_a9f8c8efefc4b65afa3576855bfd9e8a6}\label{primitivas_8h_a9f8c8efefc4b65afa3576855bfd9e8a6}} 
+\index{primitivas.h@{primitivas.h}!line@{line}}
+\index{line@{line}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{line()}{line()}}
+{\footnotesize\ttfamily void line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Cria uma linha. 
+
+A função cria uma linha entre duas coordenadas x y dadas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor com o ponto inicial e final da reta. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 30 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{30                                          \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keywordtype}{int} x0 = parametros[0];}
+\DoxyCodeLine{33     \textcolor{keywordtype}{int} x1 = parametros[2];}
+\DoxyCodeLine{34     \textcolor{keywordtype}{int} y0 = parametros[1];}
+\DoxyCodeLine{35     \textcolor{keywordtype}{int} y1 = parametros[3];}
+\DoxyCodeLine{36     \textcolor{keywordtype}{int} err, dy, dx, sx, sy, e2;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     dx = abs(x1 -\/ x0);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keywordflow}{if}(x0 < x1)\{}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         sx = 1;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         sx = -\/1;}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     dy = abs(y1 -\/ y0) * -\/1;}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keywordflow}{if}(y0 < y1)\{}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         sy = 1;}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         sy = -\/1;}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59     }
+\DoxyCodeLine{60     err = dx+dy;}
+\DoxyCodeLine{61     \textcolor{keywordflow}{while} (1)\{}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++i)}
+\DoxyCodeLine{64         \{}
+\DoxyCodeLine{65            img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[y0][x0][i] = img-\/>\mbox{\hyperlink{structimagem__t_a789e6c9c23305c4fe4f7b51557e38bd3}{cor\_atual}}[i];}
+\DoxyCodeLine{66         \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{keywordflow}{if} (x0==x1 \&\& y0==y1)\{}
+\DoxyCodeLine{69             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         e2 = 2*err;}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{keywordflow}{if} (e2 >= dy)\{}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76             err += dy;}
+\DoxyCodeLine{77             x0 += sx;}
+\DoxyCodeLine{78         \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{keywordflow}{if} (e2 <= dx)\{}
+\DoxyCodeLine{81             err += dx;}
+\DoxyCodeLine{82             y0 += sy;}
+\DoxyCodeLine{83         \}}
+\DoxyCodeLine{84     \}}
+\DoxyCodeLine{85 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_a5f798ac6399e376cd06666ffcc546ebe}\label{primitivas_8h_a5f798ac6399e376cd06666ffcc546ebe}} 
+\index{primitivas.h@{primitivas.h}!open@{open}}
+\index{open@{open}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily void open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{char}]{nome\+\_\+arquivo\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Abre uma imagem. 
+
+A função lê um arquivo de imagem e copia os pixels para uma matrix de pixels, podendo ser editada pelo programa.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem para qual a informação vinda do arquivo de imagem será salvada. \\
+\hline
+{\em nome\+\_\+arquivo} & recebe o nome do arquivo de imagem que será aberto. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 360 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{360                                            \{}
+\DoxyCodeLine{361 }
+\DoxyCodeLine{362     \textcolor{keywordtype}{char} text[15];}
+\DoxyCodeLine{363     \textcolor{keywordtype}{char} text\_split[3][50];}
+\DoxyCodeLine{364     \textcolor{keywordtype}{char} altura[5];}
+\DoxyCodeLine{365     \textcolor{keywordtype}{char} largura[5];}
+\DoxyCodeLine{366     \textcolor{keywordtype}{char} nome\_arquivo\_tratado[30];}
+\DoxyCodeLine{367     \textcolor{keywordtype}{int} qtd\_cores;}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 30; ++i)}
+\DoxyCodeLine{370     \{}
+\DoxyCodeLine{371         nome\_arquivo\_tratado[i] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{372     \}}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{374     \mbox{\hyperlink{funcoes_8h_a890ea9946119feb3fb8275a4770989c3}{limpar\_string\_arquivo}}(nome\_arquivo, nome\_arquivo\_tratado);}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376     FILE *file;}
+\DoxyCodeLine{377     file = fopen(nome\_arquivo\_tratado, \textcolor{stringliteral}{"r"});}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379     \textcolor{keywordflow}{if}(file == NULL)\{}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381         puts(\textcolor{stringliteral}{"Arquivo não encontrado"});}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{385         fgets(text, 10, file);}
+\DoxyCodeLine{386         fgets(text, 10, file);}
+\DoxyCodeLine{387         }
+\DoxyCodeLine{388         \mbox{\hyperlink{funcoes_8h_a3be5d4e7cf4ed2ea5487162905572ec3}{split}}(text, \textcolor{stringliteral}{" "}, text\_split);}
+\DoxyCodeLine{389         }
+\DoxyCodeLine{390         strcpy(altura, text\_split[1]);}
+\DoxyCodeLine{391         strcpy(largura, text\_split[0]);}
+\DoxyCodeLine{392         }
+\DoxyCodeLine{393         strcpy(img-\/>\mbox{\hyperlink{structimagem__t_aca75f0e139ac70584f7e6df724bb7032}{nome\_imagem}}, nome\_arquivo\_tratado);}
+\DoxyCodeLine{394 }
+\DoxyCodeLine{395         sscanf(altura, \textcolor{stringliteral}{"\%d"}, \&img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}});}
+\DoxyCodeLine{396         sscanf(largura, \textcolor{stringliteral}{"\%d"}, \&img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}});}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398         \mbox{\hyperlink{funcoes_8h_a6782726af7f91d3618f53dcb39e038f4}{realocar\_matriz}}(img);}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{400         \textcolor{comment}{//printf(">>>Altura: \%d\(\backslash\)n", img-\/>altura);}}
+\DoxyCodeLine{401         \textcolor{comment}{//printf(">>>Largura: \%d\(\backslash\)n", img-\/>largura);}}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403         qtd\_cores = img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}} * img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}} * 3;}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{405         \textcolor{keywordtype}{char} cores[(qtd\_cores + 1) * 12];}
+\DoxyCodeLine{406         \textcolor{keywordtype}{char} vetor\_cores[qtd\_cores][50];}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408         fgets(text, 15, file);}
+\DoxyCodeLine{409         fgets(cores, qtd\_cores * 4 , file);}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411         \mbox{\hyperlink{funcoes_8h_a3be5d4e7cf4ed2ea5487162905572ec3}{split}}(cores, \textcolor{stringliteral}{" "}, vetor\_cores);}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413         \textcolor{keywordtype}{int} indice = 0;}
+\DoxyCodeLine{414         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}}; ++i)}
+\DoxyCodeLine{415         \{}
+\DoxyCodeLine{416             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}}; ++j)}
+\DoxyCodeLine{417             \{}
+\DoxyCodeLine{418                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < 3; ++k)}
+\DoxyCodeLine{419                 \{   }
+\DoxyCodeLine{420                     sscanf(vetor\_cores[indice], \textcolor{stringliteral}{"\%d"}, \&img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i][j][k]);}
+\DoxyCodeLine{421                     indice++;}
+\DoxyCodeLine{422                 \}}
+\DoxyCodeLine{423             \}}
+\DoxyCodeLine{424         \}}
+\DoxyCodeLine{425     \}}
+\DoxyCodeLine{426 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_ade047fb3bf8dcd0651791eba51c41f58}\label{primitivas_8h_ade047fb3bf8dcd0651791eba51c41f58}} 
+\index{primitivas.h@{primitivas.h}!polygon@{polygon}}
+\index{polygon@{polygon}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{polygon()}{polygon()}}
+{\footnotesize\ttfamily void polygon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{\mbox{\hyperlink{structcomando__t}{comando}}}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Cria um polígono. 
+
+A função cria um polígono que passa pelos pontos dados.
+
+A função recebe na primeira posição do vetor de parâmetros a quantidade de pontos. Os outros parâmetros a seguir são cada uma das ordenadas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor com a quantidade de pontos e as coordenadas deles. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 111 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{111                                       \{}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{keywordtype}{int} qtd\_pontos = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[0];}
+\DoxyCodeLine{114     \textcolor{keywordtype}{int} ordenadas = cmd.\mbox{\hyperlink{structcomando__t_a35396e4f16b51882d49d48b2c75d3e60}{qtd\_parametros}} -\/1;}
+\DoxyCodeLine{115     \textcolor{keywordtype}{int} parametros[4];}
+\DoxyCodeLine{116     \textcolor{keywordtype}{int} retas[ordenadas][4];}
+\DoxyCodeLine{117     \textcolor{keywordtype}{int} indice\_retas = 0;}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \textcolor{comment}{//cria as retas}}
+\DoxyCodeLine{120     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < ordenadas; i += 2)}
+\DoxyCodeLine{121     \{}
+\DoxyCodeLine{122         \textcolor{keywordflow}{if}(i == ordenadas -\/ 2) \{}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124             retas[indice\_retas][0] = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i + 1];}
+\DoxyCodeLine{125             retas[indice\_retas][1] = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i + 2];}
+\DoxyCodeLine{126             retas[indice\_retas][2] = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[1];}
+\DoxyCodeLine{127             retas[indice\_retas][3] = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[2];}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129             indice\_retas++;}
+\DoxyCodeLine{130                 }
+\DoxyCodeLine{131         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133             retas[indice\_retas][0] = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i + 1];}
+\DoxyCodeLine{134             retas[indice\_retas][1] = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i + 2];}
+\DoxyCodeLine{135             retas[indice\_retas][2] = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i + 3];}
+\DoxyCodeLine{136             retas[indice\_retas][3] = cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i + 4];}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138             indice\_retas++;}
+\DoxyCodeLine{139         \}}
+\DoxyCodeLine{140     \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \textcolor{comment}{//coloca as retas na imagem.}}
+\DoxyCodeLine{143     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < indice\_retas; ++i)}
+\DoxyCodeLine{144     \{}
+\DoxyCodeLine{145         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < 4; ++j)}
+\DoxyCodeLine{146         \{}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148             parametros[j] = retas[i][j];  }
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150         \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152         \mbox{\hyperlink{primitivas_8h_a9f8c8efefc4b65afa3576855bfd9e8a6}{line}}(img, parametros);}
+\DoxyCodeLine{153     \}}
+\DoxyCodeLine{154 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_abf90c2e6c94f2d6ebde22203b948a901}\label{primitivas_8h_abf90c2e6c94f2d6ebde22203b948a901}} 
+\index{primitivas.h@{primitivas.h}!rect@{rect}}
+\index{rect@{rect}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{rect()}{rect()}}
+{\footnotesize\ttfamily void rect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Cria um retângulo. 
+
+A função cria um retângulo, recebendo o ponto inicial e o tamanho nos eixos x e y.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor contendo a coordenada e os tamanhos x e y. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 222 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{222                                         \{}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \mbox{\hyperlink{structcomando__t}{comando}} cmd;}
+\DoxyCodeLine{225     cmd.\mbox{\hyperlink{structcomando__t_a35396e4f16b51882d49d48b2c75d3e60}{qtd\_parametros}} = 9;}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[0] = 4;}
+\DoxyCodeLine{228     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[1] = parametros[0];}
+\DoxyCodeLine{229     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[2] = parametros[1];}
+\DoxyCodeLine{230     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[3] = parametros[0] + parametros[2];}
+\DoxyCodeLine{231     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[4] = parametros[1];}
+\DoxyCodeLine{232     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[5] = parametros[0] + parametros[2];}
+\DoxyCodeLine{233     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[6] = parametros[1] + parametros[3];}
+\DoxyCodeLine{234     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[7] = parametros[0];}
+\DoxyCodeLine{235     cmd.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[8] = parametros[1] + parametros[3];}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237     \mbox{\hyperlink{primitivas_8h_ade047fb3bf8dcd0651791eba51c41f58}{polygon}}(img, cmd);}
+\DoxyCodeLine{238 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_ad4ac5775e35014f52d854fdd4576ddcc}\label{primitivas_8h_ad4ac5775e35014f52d854fdd4576ddcc}} 
+\index{primitivas.h@{primitivas.h}!repeat\_line@{repeat\_line}}
+\index{repeat\_line@{repeat\_line}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{repeat\_line()}{repeat\_line()}}
+{\footnotesize\ttfamily void repeat\+\_\+line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcomando__t}{comando}} $\ast$}]{ultima\+\_\+entrada }\end{DoxyParamCaption})}
+
+
+
+Repete uma linha. 
+
+A função repete uma linha definido a quantidade de repetições e os incrementos no x e no y. Dessa forma, a reta é repetida pela quantidade definida, somando a altura e a largura dos incrementos para gerar as novas retas.
+
+A linha a ser repetida é a última definida.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor contendo a quantidade de repetições e os incrementos. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 87 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{87                                                                         \{}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keywordflow}{if}(strcmp(ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a60898f761f2ac91ab8012d29a9061952}{nome\_comando}}, \textcolor{stringliteral}{"line"}) == 0)\{}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91         \textcolor{keywordtype}{int} quantidade = parametros[0];}
+\DoxyCodeLine{92         \textcolor{keywordtype}{int} deltax0 = parametros[1];}
+\DoxyCodeLine{93         \textcolor{keywordtype}{int} deltay0 = parametros[2];}
+\DoxyCodeLine{94         \textcolor{keywordtype}{int} deltax1 = parametros[3];}
+\DoxyCodeLine{95         \textcolor{keywordtype}{int} deltay1 = parametros[4];}
+\DoxyCodeLine{96         \textcolor{keywordtype}{int} novos\_parametros[4];}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < quantidade; ++i)}
+\DoxyCodeLine{99         \{   }
+\DoxyCodeLine{100             novos\_parametros[0] = ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[0] + deltax0 * (i + 1);}
+\DoxyCodeLine{101             novos\_parametros[1] = ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[1] + deltay0 * (i + 1);}
+\DoxyCodeLine{102             novos\_parametros[2] = ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[2] + deltax1 * (i + 1);}
+\DoxyCodeLine{103             novos\_parametros[3] = ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[3] + deltay1 * (i + 1);}
+\DoxyCodeLine{104             \mbox{\hyperlink{primitivas_8h_a9f8c8efefc4b65afa3576855bfd9e8a6}{line}}(img, novos\_parametros);}
+\DoxyCodeLine{105         \}}
+\DoxyCodeLine{106         }
+\DoxyCodeLine{107     \}}
+\DoxyCodeLine{108 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_a6f8ec4f3dcdc816c8bebcf0df9313c4b}\label{primitivas_8h_a6f8ec4f3dcdc816c8bebcf0df9313c4b}} 
+\index{primitivas.h@{primitivas.h}!repeat\_polygon@{repeat\_polygon}}
+\index{repeat\_polygon@{repeat\_polygon}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{repeat\_polygon()}{repeat\_polygon()}}
+{\footnotesize\ttfamily void repeat\+\_\+polygon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{int}]{parametros\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcomando__t}{comando}} $\ast$}]{ultima\+\_\+entrada }\end{DoxyParamCaption})}
+
+
+
+Repete um polígono. 
+
+A função repete um polígono definido a quantidade de repetições e os incrementos no x e no y. Dessa forma, o polígono é repetido pela quantidade definida, somando a altura e a largura dos incrementos em cada um dos pontos, para gerar os novos polígonos.
+
+O polígono a ser repetído é o último definido.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em parametros} & recebe um vetor contendo a quantidade de repetições e os incrementos. \\
+\hline
+{\em ultima\+\_\+entrada} & recebe um ponteiro referente a uma struct comando que contem a última instrução que contem o polígono a ser repetido. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 157 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{157                                                                            \{}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159     \textcolor{keywordflow}{if}(strcmp(ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a60898f761f2ac91ab8012d29a9061952}{nome\_comando}}, \textcolor{stringliteral}{"polygon"}) == 0)\{}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keywordtype}{int} quantidade = parametros[0];}
+\DoxyCodeLine{162         \textcolor{keywordtype}{int} deltax = parametros[1];}
+\DoxyCodeLine{163         \textcolor{keywordtype}{int} deltay = parametros[2];}
+\DoxyCodeLine{164         \textcolor{keywordtype}{int} ordenadas = ultima\_entrada-\/>\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[0] * 2;}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166         \mbox{\hyperlink{structcomando__t}{comando}} novo\_poligono = *ultima\_entrada;}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < quantidade; ++i)}
+\DoxyCodeLine{169         \{}
+\DoxyCodeLine{170             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 1; j < ordenadas + 1; j+=2)}
+\DoxyCodeLine{171             \{}
+\DoxyCodeLine{172                 novo\_poligono.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[j] += deltax;}
+\DoxyCodeLine{173                 novo\_poligono.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[j + 1] += deltay;}
+\DoxyCodeLine{174             \}}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176             \mbox{\hyperlink{primitivas_8h_ade047fb3bf8dcd0651791eba51c41f58}{polygon}}(img, novo\_poligono);}
+\DoxyCodeLine{177         \}}
+\DoxyCodeLine{178     \}}
+\DoxyCodeLine{179 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{primitivas_8h_ae3082392647c4be3e9dc0a765bb74e79}\label{primitivas_8h_ae3082392647c4be3e9dc0a765bb74e79}} 
+\index{primitivas.h@{primitivas.h}!save@{save}}
+\index{save@{save}!primitivas.h@{primitivas.h}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void save (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img,  }\item[{char}]{nome\+\_\+arquivo\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Salva a Imagem. 
+
+Copiar os pixels da matriz de pixel para um arquivo .ppm, gerando a imagem.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & recebe o ponteiro com a imagem a salva. \\
+\hline
+{\em nome\+\_\+arquivo} & é passado o nome do arquivo de imagem a ser salvo. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 9 of file primitivas.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9                                            \{}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11     FILE *file = fopen(nome\_arquivo, \textcolor{stringliteral}{"wb"});}
+\DoxyCodeLine{12     fprintf(file, \textcolor{stringliteral}{"P3\(\backslash\)n\%d \%d\(\backslash\)n255\(\backslash\)n"}, img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}}, img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}});}
+\DoxyCodeLine{13     }
+\DoxyCodeLine{14     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < img-\/>\mbox{\hyperlink{structimagem__t_a81b15f5c844381bb803a98aebbc0db2b}{altura}}; ++i)}
+\DoxyCodeLine{15     \{}
+\DoxyCodeLine{16         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < img-\/>\mbox{\hyperlink{structimagem__t_a6834e4c39102eba36aea4350e0487ffe}{largura}}; ++j)}
+\DoxyCodeLine{17         \{}
+\DoxyCodeLine{18             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} z = 0; z < 3; ++z)}
+\DoxyCodeLine{19             \{   }
+\DoxyCodeLine{20                 fprintf(file, \textcolor{stringliteral}{"\%d "}, img-\/>\mbox{\hyperlink{structimagem__t_a8b4bfa0acd3a62135a42b6a2ea570de5}{matriz}}[i][j][z]);}
+\DoxyCodeLine{21             \}}
+\DoxyCodeLine{22         \}}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     fclose(file); }
+\DoxyCodeLine{26 \}}
+
+\end{DoxyCode}

@@ -1,0 +1,138 @@
+\begin{theindex}
+
+  \item {alocar\_matriz}
+    \subitem {funcoes.h}, \hyperpage{11}
+  \item {altura}
+    \subitem {imagem\_t}, \hyperpage{9}
+
+  \indexspace
+
+  \item {circle}
+    \subitem {primitivas.h}, \hyperpage{15}
+  \item {clear}
+    \subitem {primitivas.h}, \hyperpage{16}
+  \item {color}
+    \subitem {primitivas.h}, \hyperpage{17}
+  \item {comando\_string}
+    \subitem {comando\_t}, \hyperpage{7}
+  \item {comando\_t}, \hyperpage{7}
+    \subitem {comando\_string}, \hyperpage{7}
+    \subitem {nome\_comando}, \hyperpage{7}
+    \subitem {parametros}, \hyperpage{8}
+    \subitem {qtd\_parametros}, \hyperpage{8}
+  \item {copy\_polygon}
+    \subitem {primitivas.h}, \hyperpage{17}
+  \item {cor\_atual}
+    \subitem {imagem\_t}, \hyperpage{9}
+
+  \indexspace
+
+  \item {desalocar\_matriz}
+    \subitem {funcoes.h}, \hyperpage{11}
+
+  \indexspace
+
+  \item {executar}
+    \subitem {programa.h}, \hyperpage{25}
+
+  \indexspace
+
+  \item {fill}
+    \subitem {primitivas.h}, \hyperpage{18}
+  \item {funcoes.h}, \hyperpage{11}
+    \subitem {alocar\_matriz}, \hyperpage{11}
+    \subitem {desalocar\_matriz}, \hyperpage{11}
+    \subitem {limpar\_string\_arquivo}, \hyperpage{12}
+    \subitem {realocar\_matriz}, \hyperpage{13}
+    \subitem {retira\_barraN}, \hyperpage{13}
+    \subitem {split}, \hyperpage{14}
+
+  \indexspace
+
+  \item {image}
+    \subitem {primitivas.h}, \hyperpage{18}
+  \item {imagem\_t}, \hyperpage{8}
+    \subitem {altura}, \hyperpage{9}
+    \subitem {cor\_atual}, \hyperpage{9}
+    \subitem {largura}, \hyperpage{9}
+    \subitem {matriz}, \hyperpage{9}
+    \subitem {nome\_imagem}, \hyperpage{9}
+  \item {interpretar}
+    \subitem {programa.h}, \hyperpage{27}
+
+  \indexspace
+
+  \item {largura}
+    \subitem {imagem\_t}, \hyperpage{9}
+  \item {limpar\_string\_arquivo}
+    \subitem {funcoes.h}, \hyperpage{12}
+  \item {line}
+    \subitem {primitivas.h}, \hyperpage{19}
+
+  \indexspace
+
+  \item {matriz}
+    \subitem {imagem\_t}, \hyperpage{9}
+
+  \indexspace
+
+  \item {nome\_comando}
+    \subitem {comando\_t}, \hyperpage{7}
+  \item {nome\_imagem}
+    \subitem {imagem\_t}, \hyperpage{9}
+
+  \indexspace
+
+  \item {open}
+    \subitem {primitivas.h}, \hyperpage{20}
+
+  \indexspace
+
+  \item {parametros}
+    \subitem {comando\_t}, \hyperpage{8}
+  \item {polygon}
+    \subitem {primitivas.h}, \hyperpage{21}
+  \item {primitivas.h}, \hyperpage{15}
+    \subitem {circle}, \hyperpage{15}
+    \subitem {clear}, \hyperpage{16}
+    \subitem {color}, \hyperpage{17}
+    \subitem {copy\_polygon}, \hyperpage{17}
+    \subitem {fill}, \hyperpage{18}
+    \subitem {image}, \hyperpage{18}
+    \subitem {line}, \hyperpage{19}
+    \subitem {open}, \hyperpage{20}
+    \subitem {polygon}, \hyperpage{21}
+    \subitem {rect}, \hyperpage{22}
+    \subitem {repeat\_line}, \hyperpage{23}
+    \subitem {repeat\_polygon}, \hyperpage{23}
+    \subitem {save}, \hyperpage{24}
+  \item {programa.h}, \hyperpage{25}
+    \subitem {executar}, \hyperpage{25}
+    \subitem {interpretar}, \hyperpage{27}
+
+  \indexspace
+
+  \item {qtd\_parametros}
+    \subitem {comando\_t}, \hyperpage{8}
+
+  \indexspace
+
+  \item {realocar\_matriz}
+    \subitem {funcoes.h}, \hyperpage{13}
+  \item {rect}
+    \subitem {primitivas.h}, \hyperpage{22}
+  \item {repeat\_line}
+    \subitem {primitivas.h}, \hyperpage{23}
+  \item {repeat\_polygon}
+    \subitem {primitivas.h}, \hyperpage{23}
+  \item {retira\_barraN}
+    \subitem {funcoes.h}, \hyperpage{13}
+
+  \indexspace
+
+  \item {save}
+    \subitem {primitivas.h}, \hyperpage{24}
+  \item {split}
+    \subitem {funcoes.h}, \hyperpage{14}
+
+\end{theindex}

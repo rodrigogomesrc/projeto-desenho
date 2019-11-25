@@ -1,0 +1,192 @@
+\hypertarget{programa_8h}{}\doxysection{programa.\+h File Reference}
+\label{programa_8h}\index{programa.h@{programa.h}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{programa_8h_abaaa4014a920834bda55c39ed0c74eb6}{executar}} (char nome\+\_\+arquivo\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Função Executar, chamada no main. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{programa_8h_a6cf673ae81608d56290d3c14fad10f3f}{interpretar}} (\mbox{\hyperlink{structcomando__t}{comando}} $\ast$entrada, \mbox{\hyperlink{structcomando__t}{comando}} $\ast$ultima\+\_\+entrada, \mbox{\hyperlink{structimagem__t}{imagem}} $\ast$img)
+\begin{DoxyCompactList}\small\item\em Função de interpretação dos comandos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{programa_8h_abaaa4014a920834bda55c39ed0c74eb6}\label{programa_8h_abaaa4014a920834bda55c39ed0c74eb6}} 
+\index{programa.h@{programa.h}!executar@{executar}}
+\index{executar@{executar}!programa.h@{programa.h}}
+\doxysubsubsection{\texorpdfstring{executar()}{executar()}}
+{\footnotesize\ttfamily void executar (\begin{DoxyParamCaption}\item[{char}]{nome\+\_\+arquivo\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Função Executar, chamada no main. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nome\+\_\+arquivo} & recebe uma string correspondente ao nome do arquivo de instruções. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 82 of file programa.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{82                                   \{}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     \mbox{\hyperlink{structimagem__t}{imagem}} img = \mbox{\hyperlink{funcoes_8h_a2a715cf63176e19d14ff9a3ac02949bc}{alocar\_matriz}}();}
+\DoxyCodeLine{85     \mbox{\hyperlink{structcomando__t}{comando}} instrucao;}
+\DoxyCodeLine{86     \mbox{\hyperlink{structcomando__t}{comando}} ultima\_instrucao;}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     strcpy(ultima\_instrucao.\mbox{\hyperlink{structcomando__t_a60898f761f2ac91ab8012d29a9061952}{nome\_comando}}, \textcolor{stringliteral}{"vazio"});}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     strcpy(img.\mbox{\hyperlink{structimagem__t_aca75f0e139ac70584f7e6df724bb7032}{nome\_imagem}}, \textcolor{stringliteral}{"imagem.ppm"});}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     FILE *file;}
+\DoxyCodeLine{93     file = fopen(nome\_arquivo, \textcolor{stringliteral}{"r"});}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{char} text[50]; }
+\DoxyCodeLine{96     \textcolor{keywordtype}{char} entradas[50][50];}
+\DoxyCodeLine{97     \textcolor{keywordtype}{char} nome\_comando[50];}
+\DoxyCodeLine{98     \textcolor{keywordtype}{int} parametros[30];}
+\DoxyCodeLine{99     \textcolor{keywordtype}{int} qtd\_parametros = 0;}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{comment}{//limpa os vetores}}
+\DoxyCodeLine{102     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 30; ++i)}
+\DoxyCodeLine{103     \{}
+\DoxyCodeLine{104         parametros[i] = -\/1;}
+\DoxyCodeLine{105     \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 49; ++i)}
+\DoxyCodeLine{108     \{   }
+\DoxyCodeLine{109         text[i] = \textcolor{charliteral}{' '};}
+\DoxyCodeLine{110         strcpy(entradas[i], \textcolor{stringliteral}{" "});}
+\DoxyCodeLine{111     \}}
+\DoxyCodeLine{112     text[49] = \textcolor{charliteral}{' '};}
+\DoxyCodeLine{113     strcpy(entradas[49], \textcolor{stringliteral}{" "});}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116     \textcolor{keywordflow}{if}(file == NULL)\{}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         printf(\textcolor{stringliteral}{"Arquivo não encontrado\(\backslash\)n"});}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122         \textcolor{keywordflow}{while}(fgets(text, 50, file) != NULL)\{}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124             qtd\_parametros = 0;}
+\DoxyCodeLine{125             \mbox{\hyperlink{funcoes_8h_a3be5d4e7cf4ed2ea5487162905572ec3}{split}}(text, \textcolor{stringliteral}{" "}, entradas);}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127             strcpy(nome\_comando, entradas[0]);}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129             strcpy(instrucao.\mbox{\hyperlink{structcomando__t_a60898f761f2ac91ab8012d29a9061952}{nome\_comando}}, nome\_comando);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131             \textcolor{keywordflow}{if}(strcmp(nome\_comando, \textcolor{stringliteral}{"open"}) == 0 || strcmp(nome\_comando, \textcolor{stringliteral}{"save"}) == 0 )\{}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133                 strcpy(instrucao.\mbox{\hyperlink{structcomando__t_a60af1562b3e1553e77761c6ff0616d9c}{comando\_string}}, entradas[1]);}
+\DoxyCodeLine{134             \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136             \textcolor{comment}{// separando os comandos}}
+\DoxyCodeLine{137             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 29; ++i)}
+\DoxyCodeLine{138             \{}
+\DoxyCodeLine{139                 \textcolor{comment}{//converte a string vindo de entradas para o vetor de inteiros "parametros"}}
+\DoxyCodeLine{140                 sscanf(entradas[i + 1], \textcolor{stringliteral}{"\%d"}, \&parametros[i]);}
+\DoxyCodeLine{141             \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 30; ++i)}
+\DoxyCodeLine{144             \{}
+\DoxyCodeLine{145                 \textcolor{keywordflow}{if}(parametros[i] == -\/1)\{}
+\DoxyCodeLine{146                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{147                 \}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149                 \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{150                     qtd\_parametros++;}
+\DoxyCodeLine{151                 \}}
+\DoxyCodeLine{152             \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154             instrucao.\mbox{\hyperlink{structcomando__t_a35396e4f16b51882d49d48b2c75d3e60}{qtd\_parametros}} = qtd\_parametros;}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156             \textcolor{comment}{// limpa o vetor de instrução da struct}}
+\DoxyCodeLine{157             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 30; ++i)}
+\DoxyCodeLine{158             \{}
+\DoxyCodeLine{159                instrucao.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i] = -\/1;}
+\DoxyCodeLine{160             \}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162             \textcolor{comment}{//copiar os parâmetros extraídos para o vetor de parâmetros}}
+\DoxyCodeLine{163             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; ++i)}
+\DoxyCodeLine{164             \{}
+\DoxyCodeLine{165                instrucao.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i] = parametros[i];}
+\DoxyCodeLine{166             \}}
+\DoxyCodeLine{167             }
+\DoxyCodeLine{168             \mbox{\hyperlink{programa_8h_a6cf673ae81608d56290d3c14fad10f3f}{interpretar}}(\&instrucao, \&ultima\_instrucao, \&img);}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171             \textcolor{comment}{//preenche a struct com o comando atual após executá-\/lo, servindo como um histórico}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173             \textcolor{keywordflow}{if}(strcmp(nome\_comando, \textcolor{stringliteral}{"line"}) == 0 || strcmp(nome\_comando, \textcolor{stringliteral}{"polygon"}) == 0)\{}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175                 strcpy(ultima\_instrucao.\mbox{\hyperlink{structcomando__t_a60898f761f2ac91ab8012d29a9061952}{nome\_comando}}, nome\_comando);}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177                 ultima\_instrucao.\mbox{\hyperlink{structcomando__t_a35396e4f16b51882d49d48b2c75d3e60}{qtd\_parametros}} = qtd\_parametros;}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179                 \textcolor{comment}{// limpa o vetor de instrução da struct}}
+\DoxyCodeLine{180                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 30; ++i)}
+\DoxyCodeLine{181                 \{}
+\DoxyCodeLine{182                    ultima\_instrucao.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i] = -\/1;}
+\DoxyCodeLine{183                 \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185                 \textcolor{comment}{//copiar os parâmetros extraídos para o vetor de parâmetros}}
+\DoxyCodeLine{186                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; ++i)}
+\DoxyCodeLine{187                 \{}
+\DoxyCodeLine{188                    ultima\_instrucao.\mbox{\hyperlink{structcomando__t_a9c2af0bf77368cf8a1eedd94ef113f8a}{parametros}}[i] = parametros[i];}
+\DoxyCodeLine{189                 \}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191             \}}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193             \textcolor{comment}{//limpa os vetores para guardar novos valores}}
+\DoxyCodeLine{194             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 30; ++i)}
+\DoxyCodeLine{195             \{}
+\DoxyCodeLine{196                 parametros[i] = -\/1;}
+\DoxyCodeLine{197             \}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 49; ++i)}
+\DoxyCodeLine{200             \{   }
+\DoxyCodeLine{201                 text[i] = \textcolor{charliteral}{' '};}
+\DoxyCodeLine{202                 strcpy(entradas[i], \textcolor{stringliteral}{" "});}
+\DoxyCodeLine{203             \}}
+\DoxyCodeLine{204             text[49] = \textcolor{charliteral}{' '};}
+\DoxyCodeLine{205             strcpy(entradas[49], \textcolor{stringliteral}{" "});}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207         \}}
+\DoxyCodeLine{208         }
+\DoxyCodeLine{209         fclose(file);}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211         \mbox{\hyperlink{funcoes_8h_af99db9b8d77c2b1c1fe023e191ced11d}{desalocar\_matriz}}(\&img);}
+\DoxyCodeLine{212     \}}
+\DoxyCodeLine{213 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{programa_8h_a6cf673ae81608d56290d3c14fad10f3f}\label{programa_8h_a6cf673ae81608d56290d3c14fad10f3f}} 
+\index{programa.h@{programa.h}!interpretar@{interpretar}}
+\index{interpretar@{interpretar}!programa.h@{programa.h}}
+\doxysubsubsection{\texorpdfstring{interpretar()}{interpretar()}}
+{\footnotesize\ttfamily void interpretar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcomando__t}{comando}} $\ast$}]{entrada,  }\item[{\mbox{\hyperlink{structcomando__t}{comando}} $\ast$}]{ultima\+\_\+entrada,  }\item[{\mbox{\hyperlink{structimagem__t}{imagem}} $\ast$}]{img }\end{DoxyParamCaption})}
+
+
+
+Função de interpretação dos comandos. 
+
+Essa função recebe as informações de uma linha de comando representando as primitivas e chama a função da primitiva correspondente com os parâmetros necessários
+
+
+\begin{DoxyParams}{Parameters}
+{\em entrada} & recebe um ponteiro de uma struct comando com as informações da instrução a ser executada. \\
+\hline
+{\em ultima\+\_\+entrada} & recebe um ponteiro de uma struct comando com a ultima primitiva salva $\ast$. \\
+\hline
+{\em img} & recebe um ponteiro dde uma struct imagem com a imagem a ser modificada pelas primitivas\\
+\hline
+\end{DoxyParams}
+($\ast$) ultima\+\_\+entrada somente armazena uma primitiva quando corresponde a line ou polygon, para uso das funções repeat\+\_\+line e repeat\+\_\+polygon 
+
+Definition at line 24 of file programa.\+h.
+
