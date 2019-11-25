@@ -21,6 +21,6 @@ void executar(char nome_arquivo[]);
 	(*) ultima_entrada somente armazena uma primitiva quando corresponde a line ou polygon, 
 	para uso das funções repeat_line e repeat_polygon
 */
-void interpretar(comando *entrada, comando *ultima_entrada, imagem *img) {
+void interpretar(comando *entrada, comando *ultima_entrada, imagem *img);
 
 #endif
